@@ -1,0 +1,12 @@
+.bg-dark {
+    background-color: #14213d!important;
+}
+
+.btn-outline-warning:active, .btn-outline-warning:focus, .btn-outline-warning:hover {
+    color: #fff;
+}
+
+.carousel-inner > div {
+    height: 100vh;
+    object-fit: cover;
+}
