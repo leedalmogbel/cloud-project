@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'lastname' => Str::random(10),
             'location' => 'Al Wathba',
             'emirates_id' => 'XXX12340',
-            'dob' => date('Y-m-d H:i:s'),
+            // 'dob' => date('Y-m-d H:i:s'),
             'status' => 'A',
             'role' => 1
         ]);

@@ -33,8 +33,7 @@ class User {
             throw new FieldException(json_encode($err));
         }
 
-        $userModel = UserModel::where('username', $user->username)
-              ->first();
+        $userModel = UserModel::where('username', $user->username)->first();
 
         if (empty($userModel)) {
             throw new FieldException(json_encode([
@@ -85,8 +84,7 @@ class User {
             'username' => 'Username',
             'password' => 'Password',
             'phone' => 'Phone/Mobile No.',
-            'emirates_id' => 'Emirates ID',
-            'dob' => 'Date of Birth'
+            'emirates_id' => 'Emirates ID'
         ];
 
         // validate required fields

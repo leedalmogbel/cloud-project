@@ -35,7 +35,6 @@ class UserController extends Controller
     public function login (Request $request) {
         // EEF API CALL
 
-        
         $validator = Validator::make($request->all(), [
             'username'=>'required',
             'password'=>'required',
@@ -49,90 +48,90 @@ class UserController extends Controller
 
         $username = Str::lower($request->username);
         $password = $request->password;
-        if($username != "eiev@eiev.ae"){
+        // if($username != "eiev@eiev.ae"){
 
-            $httpClient = new \GuzzleHttp\Client();
-            $api_url = 'https://ebe.eiev-app.ae/api/uaeerf/userlogin';
-            // $api_url = 'http:/192.168.1.161:8000/api/uaeerf/userlogin';
-            $options = [
-                'headers' => [
-                    "38948f839e704e8dbd4ea2650378a388" => "0b5e7030aa4a4ee3b1ccdd4341ca3867"
-                ],
-                'form_params' => [
-                    "username" => $username,
-                    "password" => $password
-                ]
-            ];
+        //     $httpClient = new \GuzzleHttp\Client();
+        //     $api_url = 'https://ebe.eiev-app.ae/api/uaeerf/userlogin';
+        //     // $api_url = 'http:/192.168.1.161:8000/api/uaeerf/userlogin';
+        //     $options = [
+        //         'headers' => [
+        //             "38948f839e704e8dbd4ea2650378a388" => "0b5e7030aa4a4ee3b1ccdd4341ca3867"
+        //         ],
+        //         'form_params' => [
+        //             "username" => $username,
+        //             "password" => $password
+        //         ]
+        //     ];
             
-            $response = $httpClient->request('POST', $api_url, $options);
-            $loginSuccess = json_decode($response->getBody());
-            info($request->all());
+        //     $response = $httpClient->request('POST', $api_url, $options);
+        //     $loginSuccess = json_decode($response->getBody());
+        //     info($request->all());
     
-            if (!$loginSuccess->success) {
-                throw new FieldException(json_encode([
-                    'username' => 'Invalid username and password.',
-                    'password' => 'Invalid username and password.',
-                ]));
-            }
+        //     if (!$loginSuccess->success) {
+        //         throw new FieldException(json_encode([
+        //             'username' => 'Invalid username and password.',
+        //             'password' => 'Invalid username and password.',
+        //         ]));
+        //     }
     
-            $checkIfExist = UserModel::where('email', $username)->first();
-            if(!$checkIfExist) {
-                $uDetail = $loginSuccess->uprofile;
-                $newUser = array(
-                    'email' => $username,
-                    'username' => $username,
-                    'password' => Hash::make($password),
-                    'firstname' => $uDetail->fname,
-                    'lastname' => $uDetail->lname,
-                    'dob' => $uDetail->bday,
-                    'phone' => $uDetail->mobileno,
-                    'location' => 'Abu Dhabi',
-                    'role' => 3,
-                    'status' => 'A',
-                    'disciplines' => 'E',
-                    'emirates_id' => '123456789',
-                    'pwd' => $password,
-                );
-                $checkIfExist = UserModel::create($newUser);
-            } else {
-                $uDetail = $loginSuccess->uprofile;
-                $newUser = array(
-                    'email' => $username,
-                    'username' => $username,
-                    'password' => Hash::make($password),
-                    'firstname' => $uDetail->fname,
-                    'lastname' => $uDetail->lname,
-                    'dob' => $uDetail->bday,
-                    'phone' => $uDetail->mobileno,
-                    'pwd' => $password,
-                );
+        //     $checkIfExist = UserModel::where('email', $username)->first();
+        //     if(!$checkIfExist) {
+        //         $uDetail = $loginSuccess->uprofile;
+        //         $newUser = array(
+        //             'email' => $username,
+        //             'username' => $username,
+        //             'password' => Hash::make($password),
+        //             'firstname' => $uDetail->fname,
+        //             'lastname' => $uDetail->lname,
+        //             'dob' => $uDetail->bday,
+        //             'phone' => $uDetail->mobileno,
+        //             'location' => 'Abu Dhabi',
+        //             'role' => 3,
+        //             'status' => 'A',
+        //             'disciplines' => 'E',
+        //             'emirates_id' => '123456789',
+        //             'pwd' => $password,
+        //         );
+        //         $checkIfExist = UserModel::create($newUser);
+        //     } else {
+        //         $uDetail = $loginSuccess->uprofile;
+        //         $newUser = array(
+        //             'email' => $username,
+        //             'username' => $username,
+        //             'password' => Hash::make($password),
+        //             'firstname' => $uDetail->fname,
+        //             'lastname' => $uDetail->lname,
+        //             'dob' => $uDetail->bday,
+        //             'phone' => $uDetail->mobileno,
+        //             'pwd' => $password,
+        //         );
     
-                $checkIfExist = $checkIfExist->update($newUser);
-            }
-            try {
-                Auth::login($checkIfExist,$request->has('remember'));
-            } catch (\Throwable $th) {
+        //         $checkIfExist = $checkIfExist->update($newUser);
+        //     }
+        //     try {
+        //         Auth::login($checkIfExist,$request->has('remember'));
+        //     } catch (\Throwable $th) {
     
-            }
+        //     }
     
-            // login service
-            $user = ServiceProvider::userAuth($request->except('_token'))
-                  ->login();
+        //     // login service
+        //     $user = ServiceProvider::userAuth($request->except('_token'))
+        //           ->login();
     
-            $url = '/dashboard';
-            if (isset(session()->get('role')->home_url)) {
-                $url = session()->get('role')->home_url;
-            }
+        //     $url = '/dashboard';
+        //     if (isset(session()->get('role')->home_url)) {
+        //         $url = session()->get('role')->home_url;
+        //     }
 
-            $dbprofile = Userprofile::where('userid',$loginSuccess->uprofile->userid)->first();            
-            if($dbprofile){
-                $loginSuccess->uprofile->uniqueid = $dbprofile->uniqueid;
-            }
+        //     $dbprofile = Userprofile::where('userid',$loginSuccess->uprofile->userid)->first();            
+        //     if($dbprofile){
+        //         $loginSuccess->uprofile->uniqueid = $dbprofile->uniqueid;
+        //     }
 
-            session()->put('profile', $loginSuccess->uprofile);
+        //     session()->put('profile', $loginSuccess->uprofile);
 
-            return redirect($url);
-        }else{
+        //     return redirect($url);
+        // }else{
             $user = ServiceProvider::userAuth($request->except('_token'))
                   ->login();
     
@@ -154,7 +153,7 @@ class UserController extends Controller
                 "stablename"=>"Private Individual Stables"
             ));
             return redirect($url);
-        }
+        // }
         // TODO: redirect to dashboard
     }
 
