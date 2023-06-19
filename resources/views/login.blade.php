@@ -107,25 +107,20 @@
 
 <body>
     <div class="login-wrapper">
-        <div class="row g-0">
-            <div class="col-md sidebar d-none d-md-block">
+        <div class="row g-0 vh-100">
+            {{-- <div class="col-md sidebar d-none d-md-block">
                 <img src="/assets/images/eiev-logo.png" class="login-logo" />
-            </div>
+            </div> --}}
             <div class="col-lg main-div">
                 <div class="container-fluid">
 
                 
-                <div class="row login-form">
+                <div class="row login-form justify-content-center">
                     <div class="col-12 col-md-7 form">
-                        <img src="/assets/images/eiev-logo.png" class="login-logo d-block d-md-none img-fluid" />
+                        {{-- <img src="/assets/images/eiev-logo.png" class="login-logo d-block d-md-none img-fluid" /> --}}
 
                         <h1>Login into your account</h1>
                         <form method="post" action="/login">
-                            <!-- Info Alert -->
-                            <div class="alert alert-info alert-dismissible d-flex align-items-center fade show justify-content-center">
-                                <i class="fa-solid fa-circle-info"></i>
-                                <strong class="mx-2">LOGIN WITH YOUR UAEERF REGISTERED CREDENTIALS.</strong>
-                            </div>
                             @csrf
                             @include('partials.formFields.inputFormGroup', [
                                 'name' => 'username',
@@ -158,7 +153,7 @@
                         </form>
 						
                     </div>
-					<div class="col-12 col-md-5 d-flex align-items-center">
+					{{-- <div class="col-12 col-md-5 d-flex align-items-center">
 						<div class="eiev-inquiry">
 							
 						</div>
@@ -184,7 +179,7 @@
                             </div>
 							
 						</div>
-					</div>
+					</div> --}}
                 </div>
             </div>
             </div>

@@ -30,5 +30,135 @@ class UserSeeder extends Seeder
             'status' => 'A',
             'role' => 1
         ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor1',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor2',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor3',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor4',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor5',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor6',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor7',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor8',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor9',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'email' => Str::random(10).'@gmail.com',
+            'username' => 'doctor10',
+            'password' => Hash::make('password'),
+            'firstname' => Str::random(10),
+            'lastname' => Str::random(10),
+            'location' => 'Al Wathba',
+            'emirates_id' => 'XXX12340',
+            // 'dob' => date('Y-m-d H:i:s'),
+            'status' => 'A',
+            'role' => 1
+        ]);
     }
 }

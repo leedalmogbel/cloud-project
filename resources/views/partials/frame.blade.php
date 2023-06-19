@@ -26,6 +26,7 @@
         <script type="text/javascript" src="/components/toastr/build/toastr.min.js"></script>
         <script type="text/javascript" src="/components/jquery-confirm/dist/jquery-confirm.min.js"></script>
         <script type="text/javascript" src="/components/daterangepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="/components/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	</head>
     <style>
@@ -86,11 +87,11 @@
             font-weight: 600;
         }
         span.content__hamburger {
-            background-color: #13214A;
+            background-color: #926f34;
         }
 
         nav.navbar.navbar-inverse.navbar-fixed-top {
-            background-color: #13214A;
+            background-color: #926f34;
         }
     </style>
 	<body>  
@@ -98,7 +99,7 @@
             <div class="row">
                 <nav class="navbar navbar-inverse navbar-fixed-top p-2">
                     <span class="content__hamburger" id="nav-header"><i class="fa-solid fa-bars"></i></span>
-                    <span class="content__title"> EIEV REGISTRATION</span>
+                    {{-- <span class="content__title"> EIEV REGISTRATION</span> --}}
                 </nav>
             </div>
 			<div class="row no-gutters">

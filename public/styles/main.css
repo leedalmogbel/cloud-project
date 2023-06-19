@@ -1,35 +1,42 @@
 /* override design class */
 .bg-dark {
-    background-color: #14213d!important;
+	background-color: #926f34 !important;
 }
 
 body {
 	font-size: 14px;
 	font-family: 'Roboto', sans-serif;
 }
+
 .image-container-riders {
 	background: url('/assets/images/rider-icon.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 }
+
 .image-container-trainers {
 	background: url('/assets/images/trainer-icon.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 }
+
 .image-container-horses {
 	background: url('/assets/images/horses-icon.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 }
 
-.text-pending { color: #FFA500; }
+.text-pending {
+	color: #FFA500;
+}
 
 .upcoming-list__wrapper .list-group .card:hover {
 	background-color: #d3d3d3;
 }
 
-.wrapper { width: 100%; }
+.wrapper {
+	width: 100%;
+}
 
 .sidebar {
 	position: absolute;
@@ -37,7 +44,7 @@ body {
 	z-index: 1000;
 	overflow-y: scroll;
 	transform: translateX(-100%);
-	background: #13214A;
+	background: #926f34;
 	height: 100vh;
 	transition: transform 0.5s ease-in-out;
 }
@@ -50,7 +57,11 @@ body {
 	margin: 50px 0;
 }
 
-.sidebar .logo img { display: block; margin: auto; width: 280px; }
+.sidebar .logo img {
+	display: block;
+	margin: auto;
+	width: 280px;
+}
 
 .side-menu {
 	border-top: 1px solid #f1f1f1;
@@ -73,7 +84,8 @@ body {
 	padding-left: 30px;
 }
 
-.side-menu li a:hover, .side-menu li a.active {
+.side-menu li a:hover,
+.side-menu li a.active {
 	background: #fff;
 	color: #13214A;
 	text-decoration: none;
@@ -92,29 +104,41 @@ h1 {
 	font-size: 21px;
 }
 
-h2 { font-size: 19px; }
+h2 {
+	font-size: 19px;
+}
+
 .table th {
 	font-size: 12px;
 }
 
-.btn { font-size: 12px; }
+.btn {
+	font-size: 12px;
+}
+
 .btn-main {
 	background: #13214A !important;
 	color: #fff !important;
 }
 
 a {
-	color:  #13214A;
+	color: #13214A;
 	text-decoration: none;
 }
 
 a:hover {
-	color:  #13214A;
+	color: #13214A;
 }
 
-.hidden { display: none; }
+.hidden {
+	display: none;
+}
 
-.page-link { font-size: 12px; color: #13214A; }
+.page-link {
+	font-size: 12px;
+	color: #13214A;
+}
+
 .page-item.active .page-link {
 	background: #13214A;
 	border-color: #13214A;
@@ -172,10 +196,10 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 a:focus,
-.uneditable-input:focus {   
-  border-color: inheret;
-  box-shadow: none;
-  outline: 0 none;
+.uneditable-input:focus {
+	border-color: inheret;
+	box-shadow: none;
+	outline: 0 none;
 }
 
 .event-info {
@@ -192,10 +216,11 @@ a:focus,
 
 	.sidebar {
 		position: initial;
-    width: 16.66666667%;	
-    transform: translateX(0%);
-    max-width: initial;
-		height: auto;
+		width: 16.66666667%;
+		transform: translateX(0%);
+		max-width: initial;
+		/* height: auto; */
+		height: 100vh;
 		margin-left: -16.66666667%;
 		transition: margin .5s ease-in-out;
 	}
@@ -208,5 +233,5 @@ a:focus,
 		padding: 10px;
 	}
 
-	
+
 }
