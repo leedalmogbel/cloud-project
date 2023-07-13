@@ -1,3 +1,7 @@
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="/dashboard" class="btn btn-secondary me-md-2" type="button">
+        < Back to Dashboard </a>
+</div>
 <br />
 <h2 class="text-danger">Stable</h2>
 <div class="stable">

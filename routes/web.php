@@ -208,6 +208,8 @@ Route::get('/logout', function () {
 Route::get('/dashboard', "DashboardController@index");
 Route::get('/me', 'UserController@me');
 Route::get('/stable/detail/{id}', 'StableController@show');
+Route::get('/stable/edit/{id}', 'StableController@edit');
+Route::post('/stable/edit/{id}', 'StableController@update');
 Route::get('/stable/create', 'StableController@createForm');
 Route::post('/stable/create', 'StableController@saveForm');
 

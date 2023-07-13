@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\URL;
@@ -34,8 +35,8 @@ class StableController extends Controller
     {
         //
 
-        if(Auth::check()) {
-            Session::flash('message', __($this->getMessage()));
+        if(empty(Session::has('role'))) {
+            Session::flash('message', 'Session Expired!');
             Session::flash('message_type', 'error');
 
             return redirect('/');
@@ -48,12 +49,12 @@ class StableController extends Controller
     {
         //
 
-        // if(Auth::check()) {
-        //     Session::flash('message', __($this->getMessage()));
-        //     Session::flash('message_type', 'error');
+        if(empty(Session::has('role'))) {
+            Session::flash('message', 'Session Expired!');
+            Session::flash('message_type', 'error');
 
-        //     return redirect('/');
-        // }
+            return redirect('/');
+        }
 
         $validator = Validator::make($request->all(),[
             'stable_no' => 'required',
@@ -83,22 +84,24 @@ class StableController extends Controller
         //TODO:  insert into db (eloquent)
         try {
 
+            $stable_uuid = (string) Str::uuid();
+
             $owner_eid_photo_path = "";
             if($request->hasFile('owner_eid_photo')) {
                 $file = $request->file('owner_eid_photo');
                 $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $request->stable_no;
+                $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid;
                 $file->move($destinationPath, $fileName);
-                $owner_eid_photo_path = '/img/'.$user->user_id."/stable-" . $request->stable_no ."/".$fileName;
+                $owner_eid_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/".$fileName;
             }
 
             $foreman_eid_photo_path = "";
             if($request->hasFile('foreman_eid_photo')) {
                 $file = $request->file('foreman_eid_photo');
                 $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $request->stable_no;
+                $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid;
                 $file->move($destinationPath, $fileName);
-                $foreman_eid_photo_path = '/img/'.$user->user_id."/stable-" . $request->stable_no ."/".$fileName;
+                $foreman_eid_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/".$fileName;
             }
             
 
@@ -114,6 +117,7 @@ class StableController extends Controller
             $stable->foreman_eid = $request->foreman_eid;
             $stable->foreman_eid_photo = $foreman_eid_photo_path;
             $stable->total_horses = $request->total_horses;
+            $stable->uuid = $stable_uuid;
             $stable->user_id = $user->user_id;
 
             $stable->save();
@@ -125,18 +129,18 @@ class StableController extends Controller
                 if($request->file('data')[$key]['passport_photo']) {
                     $file = $request->file('data')[$key]['passport_photo'];
                     $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                    $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable->stable_id ."/horse/";
+                    $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
                     $file->move($destinationPath, $fileName);
-                    $passport_photo_path = '/img/'.$user->user_id."/stable-" . $stable->stable_id ."/horse/".$fileName;
+                    $passport_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
                 }
 
                 $horse_photo_path = "";
                 if($request->file('data')[$key]['horse_photo']) {
                     $file = $request->file('data')[$key]['horse_photo'];
                     $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                    $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable->stable_id ."/horse/";
+                    $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
                     $file->move($destinationPath, $fileName);
-                    $horse_photo_path = '/img/'.$user->user_id."/stable-" . $stable->stable_id ."/horse/".$fileName;
+                    $horse_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
                 }
 
                 $data[$key]['stable_id'] = $stable->stable_id;
@@ -176,8 +180,8 @@ class StableController extends Controller
     {
         //
 
-        if(Auth::check()) {
-            Session::flash('message', __($this->getMessage()));
+        if(empty(Session::has('role'))) {
+            Session::flash('message', 'Session Expired!');
             Session::flash('message_type', 'error');
 
             return redirect('/');
@@ -196,6 +200,15 @@ class StableController extends Controller
     public function edit($id)
     {
         //
+        if(empty(Session::has('role'))) {
+            Session::flash('message', 'Session Expired!');
+            Session::flash('message_type', 'error');
+
+            return redirect('/');
+        }
+        
+        $stable = Stable::where('stable_id', $id)->with('horses')->first();
+        return view('pages.stable.edit', ['stable' => $stable, 'page' => 'edit']);
     }
 
     /**

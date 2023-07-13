@@ -14,8 +14,8 @@ class DashboardController extends Controller
     //
     public function index() {
 
-        if(Auth::check()) {
-            Session::flash('message', __($this->getMessage()));
+        if(empty(Session::has('role'))) {
+            Session::flash('message', 'Session Expired!');
             Session::flash('message_type', 'error');
 
             return redirect('/');
@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         $user = json_decode(session()->get('user'));
         $stables = Stable::withCount('horses')->get();
-        
+        // dd(session()->get('user'));
         if (session()->get('role')->role !== 'superadmin') {
             $stables = Stable::where('user_id', $user->user_id)->withCount('horses')->orderBy('stable_id', 'asc')->get();
         }

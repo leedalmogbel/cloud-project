@@ -1,5 +1,4 @@
 @extends('partials.frame')
-
 @section('content')
     <div class="content col col-md">
         <div class="container">
@@ -10,157 +9,158 @@
             <br />
             <h2 class="text-danger">Stable</h2>
             <div class="stable">
-                {{-- start: stable --}}
-                <div class="row">
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'stable_no',
-                            'label' => 'Stable No',
-                            'value' => $stable->stable_no ? $stable->stable_no : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Stable no',
-                        ])
+                <form method="post" action="{{ $form_url ?? '' }}" enctype="multipart/form-data">
+                    @csrf
+                    {{-- start: stable --}}
+                    <div class="row">
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'stable_no',
+                                'label' => 'Stable No',
+                                'value' => $stable->stable_no ? $stable->stable_no : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Stable no',
+                            ])
+                        </div>
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'name',
+                                'label' => 'Stable Name',
+                                'value' => $stable->name ? $stable->name : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Stable name',
+                            ])
+                        </div>
                     </div>
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'name',
-                            'label' => 'Stable Name',
-                            'value' => $stable->name ? $stable->name : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Stable name',
-                        ])
-                    </div>
-                </div>
-                {{-- end: stable --}}
+                    {{-- end: stable --}}
 
-                {{-- start: owner --}}
-                <br />
-                <h2 class="text-danger">Owner</h2>
-                <div class="row">
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'owner_name',
-                            'label' => 'Owner Name',
-                            'value' => $stable->owner_name ? $stable->owner_name : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Owner name',
-                        ])
+                    {{-- start: owner --}}
+                    <br />
+                    <h2 class="text-danger">Owner</h2>
+                    <div class="row">
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'owner_name',
+                                'label' => 'Owner Name',
+                                'value' => $stable->owner_name ? $stable->owner_name : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Owner name',
+                            ])
+                        </div>
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'owner_mobile',
+                                'label' => 'Owner Contact No',
+                                'value' => $stable->owner_mobile ? $stable->owner_mobile : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Owner Contact No',
+                            ])
+                        </div>
                     </div>
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'owner_mobile',
-                            'label' => 'Owner Contact No',
-                            'value' => $stable->owner_mobile ? $stable->owner_mobile : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Owner Contact No',
-                        ])
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'owner_eid',
-                            'label' => 'Owner Emirates ID',
-                            'value' => $stable->owner_eid ? $stable->owner_eid : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Owner Emirates ID',
-                        ])
-                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'owner_eid',
+                                'label' => 'Owner Emirates ID',
+                                'value' => $stable->owner_eid ? $stable->owner_eid : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Owner Emirates ID',
+                            ])
+                        </div>
 
-                    <div class="col">
-                        {{-- @include('partials.formFields.inputFormGroup', [
-                            'type' => 'file',
-                            'required' => true,
-                            'name' => 'owner_eid_photo',
-                            'label' => 'Owner EID Photo',
-                            'value' => $stable->owner_eid_photo ? $stable->owner_eid_photo : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                        ]) --}}
-                        <img src="{{ url($stable->owner_eid_photo) }}" class="img-fluid" alt="">
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'file',
+                                'required' => true,
+                                'name' => 'owner_eid_photo',
+                                'label' => 'Owner EID Photo',
+                                'value' => $stable->owner_eid_photo ? $stable->owner_eid_photo : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                            ])
+                            <img src="{{ url($stable->owner_eid_photo) }}" class="img-fluid" alt="">
+                        </div>
                     </div>
-                </div>
-                {{-- end: owner --}}
+                    {{-- end: owner --}}
 
-                {{-- start: foreman --}}
-                <br />
-                <h2 class="text-danger">Foreman</h2>
-                <div class="row">
+                    {{-- start: foreman --}}
+                    <br />
+                    <h2 class="text-danger">Foreman</h2>
+                    <div class="row">
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'foreman_name',
+                                'label' => 'Foreman Name',
+                                'value' => $stable->foreman_name ? $stable->foreman_name : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Foreman name',
+                            ])
+                        </div>
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'foreman_mobile',
+                                'label' => 'Foreman Contact No',
+                                'value' => $stable->foreman_mobile ? $stable->foreman_mobile : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Foreman Contact No',
+                            ])
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'text',
+                                'required' => true,
+                                'name' => 'foreman_eid',
+                                'label' => 'Foreman Emirates ID',
+                                'value' => $stable->foreman_eid ? $stable->foreman_eid : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                                'placeholder' => 'Enter Foreman Emirates ID',
+                            ])
+                        </div>
+
+                        <div class="col">
+                            @include('partials.formFields.inputFormGroup', [
+                                'type' => 'file',
+                                'required' => true,
+                                'name' => 'foreman_eid_photo',
+                                'label' => 'FOreman EID Photo',
+                                'value' => $stable->foreman_eid_photo ? $stable->foreman_eid_photo : '',
+                                'disabled' => $page == 'detail' ? true : false,
+                            ])
+                            <img src="{{ url($stable->foreman_eid_photo) }}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    {{-- end: foreman --}}
+
+
+                    <br />
                     <div class="col">
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'foreman_name',
-                            'label' => 'Foreman Name',
-                            'value' => $stable->foreman_name ? $stable->foreman_name : '',
+                            'name' => 'total_horses',
+                            'label' => 'Total Horse',
+                            'idName' => 'total_horse',
+                            'value' => $stable->total_horses ? $stable->total_horses : '',
                             'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Foreman name',
+                            'placeholder' => 'Enter Total Horse',
                         ])
                     </div>
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'foreman_mobile',
-                            'label' => 'Foreman Contact No',
-                            'value' => $stable->foreman_mobile ? $stable->foreman_mobile : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Foreman Contact No',
-                        ])
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'foreman_eid',
-                            'label' => 'Foreman Emirates ID',
-                            'value' => $stable->foreman_eid ? $stable->foreman_eid : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'placeholder' => 'Enter Foreman Emirates ID',
-                        ])
-                    </div>
-
-                    <div class="col">
-                        {{-- @include('partials.formFields.inputFormGroup', [
-                            'type' => 'file',
-                            'required' => true,
-                            'name' => 'foreman_eid_photo',
-                            'label' => 'FOreman EID Photo',
-                            'value' => $stable->foreman_eid_photo ? $stable->foreman_eid_photo : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            // 'placeholder' => 'Enter Owner Contact No',
-                        ]) --}}
-                        <img src="{{ url($stable->foreman_eid_photo) }}" class="img-fluid" alt="">
-                    </div>
-                </div>
-                {{-- end: foreman --}}
-
-
-                <br />
-                <div class="col">
-                    @include('partials.formFields.inputFormGroup', [
-                        'type' => 'text',
-                        'required' => true,
-                        'name' => 'total_horses',
-                        'label' => 'Total Horse',
-                        'idName' => 'total_horse',
-                        'value' => $stable->total_horses ? $stable->total_horses : '',
-                        'disabled' => $page == 'detail' ? true : false,
-                        'placeholder' => 'Enter Total Horse',
-                    ])
-                </div>
-                {{-- <a href="#" class="btn btn-main" id="add-entry"><i class="fa-solid fa-plus"></i> Add Horse</a> --}}
+                    {{-- <a href="#" class="btn btn-main" id="add-entry"><i class="fa-solid fa-plus"></i> Add Horse</a> --}}
             </div>
 
             @foreach ($stable->horses as $horse)
@@ -278,41 +278,46 @@
                 </div>
 
                 <div class="row entry align-items-center mb-2  mh-400 mw-400">
-                    {{-- <div class="col">
-                @include('partials.formFields.inputFormGroup', [
-                    'type' => 'file',
-                    'required' => true,
-                    'name' => 'data[__i__][passport_photo]',
-                    'label' => 'Passport Photo',
-                ])
-            </div> --}}
+                    <div class="col">
+                        @include('partials.formFields.inputFormGroup', [
+                            'type' => 'file',
+                            'required' => true,
+                            'name' => 'data[__i__][passport_photo]',
+                            'label' => 'Passport Photo',
+                        ])
+                    </div>
                     <div class="col">
                         <label for="">Passport Photo</label>
                         <img src="{{ url($horse->passport_photo) }}" class="img-fluid" alt="">
                     </div>
-                    <div class="col">
+                    {{-- <div class="col">
                         <label for="">Horse Photo</label>
                         <img src="{{ url($horse->horse_photo) }}" class="img-fluid" alt="">
-                    </div>
+                    </div> --}}
 
 
                 </div>
 
                 <div class="row entry align-items-center mb-2  mh-400 mw-400">
-                    {{-- <div class="col">
-                @include('partials.formFields.inputFormGroup', [
-                    'type' => 'file',
-                    'required' => true,
-                    'name' => 'data[__i__][horse_photo]',
-                    'label' => 'Horse Photo',
-                ])
-            </div> --}}
-                    {{-- <label for="">Horse Photo</label>
-                    <img src="{{ url($horse->horse_photo) }}" class="img-fluid" alt=""> --}}
-
+                    <div class="col">
+                        @include('partials.formFields.inputFormGroup', [
+                            'type' => 'file',
+                            'required' => true,
+                            'name' => 'data[__i__][horse_photo]',
+                            'label' => 'Horse Photo',
+                        ])
+                    </div>
+                    <div class="col">
+                        <label for="">Horse Photo</label>
+                        <img src="{{ url($horse->horse_photo) }}" class="img-fluid" alt="">
+                    </div>
                 </div>
                 <hr>
             @endforeach
+            <br />
+            <br />
+            <button type="submit" class="btn btn-secondary submit-btn">SUBMIT</button>
+            </form>
         </div>
     </div>
 
