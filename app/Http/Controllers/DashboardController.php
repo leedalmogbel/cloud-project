@@ -22,12 +22,12 @@ class DashboardController extends Controller
         }
 
         $user = json_decode(session()->get('user'));
-        $stables = Stable::withCount('horses')->get();
-        // dd(session()->get('user'));
+        $stables = Stable::withCount('horses')->with('user')->get();
+
         if (session()->get('role')->role !== 'superadmin') {
             $stables = Stable::where('user_id', $user->user_id)->withCount('horses')->orderBy('stable_id', 'asc')->get();
         }
 
-        return view('pages.dashboard', ['stables' => $stables ]);
+        return view('pages.dashboard', ['stables' => $stables, 'role' => session()->get('role')->role]);
     }
 }

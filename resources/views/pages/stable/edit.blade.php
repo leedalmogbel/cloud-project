@@ -171,7 +171,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'data[__i__][name]',
+                            'name' => "data[$loop->index][name]",
                             'value' => $horse->name ? $horse->name : '',
                             'disabled' => $page == 'detail' ? true : false,
                             'label' => 'Name',
@@ -182,7 +182,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'data[__i__][colour]',
+                            'name' => "data[$loop->index][colour]",
                             'value' => $horse->colour ? $horse->colour : '',
                             'disabled' => $page == 'detail' ? true : false,
                             'label' => 'Colour',
@@ -193,7 +193,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'data[__i__][age]',
+                            'name' => "data[$loop->index][age]",
                             'value' => $horse->age ? $horse->age : '',
                             'disabled' => $page == 'detail' ? true : false,
                             'label' => 'Age',
@@ -207,7 +207,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'data[__i__][owner_name]',
+                            'name' => "data[$loop->index][owner_name]",
                             'value' => $horse->owner_name ? $horse->owner_name : '',
                             'disabled' => $page == 'detail' ? true : false,
                             'label' => 'Owner Name',
@@ -218,7 +218,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'data[__i__][owner_mobile]',
+                            'name' => "data[$loop->index][owner_mobile]",
                             'value' => $horse->owner_mobile ? $horse->owner_mobile : '',
                             'disabled' => $page == 'detail' ? true : false,
                             'label' => 'Owner Mobile',
@@ -231,7 +231,7 @@
                     {{-- <div class="col">
                 @include('partials.formFields.selectFormGroup', [
                     'label' => 'Is there a Microchip?',
-                    'name' => 'data[__i__][is_microchip]',
+                    'name' => 'data[{{$loop->index}}][is_microchip]',
                     'required' => true,
                     'placeholder' => 'Select',
                     'className' => 'horse-select select-2-basic',
@@ -243,7 +243,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'data[__i__][microchip_no]',
+                            'name' => "data[$loop->index][microchip_no]",
                             'value' => $horse->microchip_no ? $horse->microchip_no : '',
                             'disabled' => $page == 'detail' ? true : false,
                             'label' => 'Microchip No',
@@ -256,7 +256,7 @@
                     {{-- <div class="col">
                 @include('partials.formFields.selectFormGroup', [
                     'label' => 'Is there a Passport?',
-                    'name' => 'data[__i__][is_passport]',
+                    'name' => 'data[{{$loop->index}}][is_passport]',
                     'required' => true,
                     'placeholder' => 'Select',
                     'className' => 'horse-select select-2-basic',
@@ -268,7 +268,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'text',
                             'required' => true,
-                            'name' => 'data[__i__][passport_no]',
+                            'name' => "data[$loop->index][passport_no]",
                             'value' => $horse->passport_no ? $horse->passport_no : '',
                             'disabled' => $page == 'detail' ? true : false,
                             'label' => 'Passport No',
@@ -282,7 +282,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'file',
                             'required' => true,
-                            'name' => 'data[__i__][passport_photo]',
+                            'name' => "data[$loop->index][passport_photo]",
                             'label' => 'Passport Photo',
                         ])
                     </div>
@@ -303,7 +303,7 @@
                         @include('partials.formFields.inputFormGroup', [
                             'type' => 'file',
                             'required' => true,
-                            'name' => 'data[__i__][horse_photo]',
+                            'name' => "data[$loop->index][horse_photo]",
                             'label' => 'Horse Photo',
                         ])
                     </div>

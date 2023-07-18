@@ -21,6 +21,7 @@
                     @csrf
                     @include("pages.$modelName.form")
                     <br /><br />
+                    {{ $page }}
                     @if ($page == 'detail')
                     @else
                         {{-- <button type="submit" class="btn btn-main submit-btn">{{ strtoupper($page) }}</button> --}}
@@ -33,4 +34,12 @@
         </div>
     </div>
     @yield('custom-script')
+@endsection
+
+@section('custom-script')
+    <script>
+        $('.submit-btn').click(function() {
+            $(this).attr('disabled', 'disabled');
+        });
+    </script>
 @endsection

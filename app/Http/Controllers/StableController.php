@@ -62,17 +62,14 @@ class StableController extends Controller
             'owner_name' => 'required',
             'owner_mobile' => 'required',
             'owner_eid' => 'required',
-            'foreman_name' => 'required',
-            'foreman_mobile' => 'required',
-            'foreman_eid' => 'required',
             'total_horses' => 'required',
             'owner_eid_photo' => 'required|image',
-            'foreman_eid_photo' => 'nullable|image',
         ]);
 
         if($validator->fails()){
             $this->flashMsg('Required Info must be filled out.', 'warning');
-            return redirect(URL::current());
+            return redirect()->back()->withInput();
+            // return redirect(URL::current());
         }
 
 
@@ -106,24 +103,29 @@ class StableController extends Controller
             
 
             $stable = new Stable;
-            $stable->stable_no = $request->stable_no;
-            $stable->name = $request->name;
-            $stable->owner_name = $request->owner_name;
-            $stable->owner_mobile = $request->owner_mobile;
-            $stable->owner_eid = $request->owner_eid;
-            $stable->owner_eid_photo =  $owner_eid_photo_path;
-            $stable->foreman_name = $request->foreman_name;
-            $stable->foreman_mobile = $request->foreman_mobile;
-            $stable->foreman_eid = $request->foreman_eid;
-            $stable->foreman_eid_photo = $foreman_eid_photo_path;
+            $stable->stable_no = $request->stable_no ?? '';
+            $stable->name = $request->name ?? '';
+            $stable->owner_name = $request->owner_name ?? '';
+            $stable->owner_mobile = $request->owner_mobile ?? '';
+            $stable->owner_eid = $request->owner_eid ?? '';
+            $stable->owner_eid_photo =  $owner_eid_photo_path ?? '';
+            $stable->foreman_name = $request->foreman_name ?? '';
+            $stable->foreman_mobile = $request->foreman_mobile ?? '';
+            $stable->foreman_eid = $request->foreman_eid ?? '';
+            $stable->foreman_eid_photo = $foreman_eid_photo_path ?? '';
             $stable->total_horses = $request->total_horses;
             $stable->uuid = $stable_uuid;
             $stable->user_id = $user->user_id;
 
-            $stable->save();
+            // $stable->save();
 
             $data = $request->data;
             foreach ($data as $key => $value) {
+
+                if (is_null($data[$key]['name'])) {
+                    $this->flashMsg('Horse Info must be filled out.', 'warning');
+                    return redirect(URL::current());
+                }
 
                 $passport_photo_path = "";
                 if($request->file('data')[$key]['passport_photo']) {
@@ -155,7 +157,7 @@ class StableController extends Controller
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-        
+
         return redirect('/dashboard');
     }
 
@@ -221,6 +223,7 @@ class StableController extends Controller
     public function update(Request $request, $id)
     {
         //
+        dd($request);
     }
 
     /**

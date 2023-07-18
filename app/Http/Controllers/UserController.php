@@ -140,18 +140,18 @@ class UserController extends Controller
                 $url = session()->get('role')->home_url;
             }
     
-            session()->put('profile', (object) array(
-                "latestupdate"=>"2022-11-14T19:56:01",
-                "isactive"=>"true",
-                "email"=>"oecryk@gmail.com",
-                "userid"=>"6671",
-                "fname"=>"Amer",
-                "lname"=>"Ali Amer",
-                "mobileno"=>"00971529550336",
-                "bday"=>"1998-10-21T00:00:00",
-                "stableid"=>"E0000014",
-                "stablename"=>"Private Individual Stables"
-            ));
+            // session()->put('profile', (object) array(
+            //     "latestupdate"=>"2022-11-14T19:56:01",
+            //     "isactive"=>"true",
+            //     "email"=>"oecryk@gmail.com",
+            //     "userid"=>"6671",
+            //     "fname"=>"Amer",
+            //     "lname"=>"Ali Amer",
+            //     "mobileno"=>"00971529550336",
+            //     "bday"=>"1998-10-21T00:00:00",
+            //     "stableid"=>"E0000014",
+            //     "stablename"=>"Private Individual Stables"
+            // ));
             return redirect($url);
         // }
         // TODO: redirect to dashboard
@@ -180,43 +180,78 @@ class UserController extends Controller
     public function register(Request $request) {
         // TODO: Documents upload;
 
-        // register service
-        $user = ServiceProvider::userAuth($request->except('_token'))
-              ->register($request->input('c_pass'));
+        // // register service
+        // $user = ServiceProvider::userAuth($request->except('_token'))
+        //       ->register($request->input('c_pass'));
 
-        // It passed here, so this must be success
-        $this->flashMsg('Registration complete', 'success');
-        // then redirect to login
-        return redirect('/login');
+        // // It passed here, so this must be success
+        // $this->flashMsg('Registration complete', 'success');
+        // // then redirect to login
+        // return redirect('/login');
     }
 
     public function me() {
-        $uprofile = session()->get('profile');
-        $modelName = 'profile';
-        if (empty($uprofile)) {
-            $this->flashMsg('Forbidden Action', 'warning');
-            // then redirect to login
-            return redirect('/dashboard');
-        }
+        // $uprofile = session()->get('profile');
+        // $modelName = 'profile';
+        // if (empty($uprofile)) {
+        //     $this->flashMsg('Forbidden Action', 'warning');
+        //     // then redirect to login
+        //     return redirect('/dashboard');
+        // }
 
-        return view('pages.userprofile', [
-            'profile' => $uprofile,
-            'modelName' => $modelName
-        ]);
+        // return view('pages.userprofile', [
+        //     'profile' => $uprofile,
+        //     'modelName' => $modelName
+        // ]);
     }
 
     public function downloadQRCode(Request $request)
     {
-        $profile = session()->get('profile');
+        // $profile = session()->get('profile');
 
-        $headers    = array('Content-Type' => ['png','svg','eps']);
-        $contents = file_get_contents("https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=".$profile->uniqueid."&choe=UTF-8");
+        // $headers    = array('Content-Type' => ['png','svg','eps']);
+        // $contents = file_get_contents("https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=".$profile->uniqueid."&choe=UTF-8");
 
-        $filename = 'qrEntry.png';
-        \Storage::disk('public')->put($filename, $contents);
+        // $filename = 'qrEntry.png';
+        // \Storage::disk('public')->put($filename, $contents);
 
-        $qrFile = \Storage::path('public/'.$filename);
+        // $qrFile = \Storage::path('public/'.$filename);
 
-        return response()->download($qrFile)->deleteFileAfterSend(true);
+        // return response()->download($qrFile)->deleteFileAfterSend(true);
+    }
+
+    public function listUsers() {
+        $users = UserModel::withCount('stables')->get()->except(session()->get('user')->user_id);
+
+        return view('pages.user.listing', ['users' => $users]);
+    }
+
+    public function show (Request $request) {
+        $user = UserModel::find($request->id);
+
+        return view('pages.user.edit', ['user' => $user, 'page' => 'edit']);
+    }
+
+    public function updateUser (Request $request, $id) {
+        $user = UserModel::find($id);
+
+        try {
+            $user->username = $request->username;
+            $user->firstname = $request->firstname;
+            $user->lastname = $request->lastname;
+            if (!isset($request->password)) {
+                unset($request['password']);
+                // $user->password = $request->password;
+            }
+
+            $user->update();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+
+        }
+
+        $this->flashMsg(sprintf('Data entered successfully.'), 'success');
+
+        return redirect('/users');
     }
 }

@@ -14,11 +14,14 @@
                 <i class="fa fa-horse" aria-hidden="true"></i> Add Stable
             </a>
         </li>
-        {{-- <li>
-            <a href="#">
-                <i class="fa fa-users" aria-hidden="true"></i> Users
-            </a>
-        </li>
+        @if ($role === 'superadmin')
+            <li>
+                <a href="/users">
+                    <i class="fa fa-users" aria-hidden="true"></i> Users
+                </a>
+            </li>
+        @endif
+        {{-- 
         <li>
             <a href="#">
                 <i class="fa fa-calendar" aria-hidden="true"></i> Calendar

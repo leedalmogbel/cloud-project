@@ -13,7 +13,7 @@
                 'required' => true,
                 'name' => 'stable_no',
                 'label' => 'Stable No',
-                // 'value' => $stable->stable_no ? $stable->stable_no : '',
+                // 'value' => $stable->stable_no ?? '',
                 // 'disabled' => $page == 'detail' ? true : false,
                 'placeholder' => 'Enter Stable no',
             ])
