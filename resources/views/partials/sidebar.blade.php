@@ -14,7 +14,7 @@
                 <i class="fa fa-horse" aria-hidden="true"></i> Add Stable
             </a>
         </li>
-        @if ($role === 'superadmin')
+        @if (Session::get('role')->role === 'superadmin')
             <li>
                 <a href="/users">
                     <i class="fa fa-users" aria-hidden="true"></i> Users
