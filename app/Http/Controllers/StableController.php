@@ -125,7 +125,7 @@ class StableController extends Controller
 
                 if (is_null($data[$key]['name'])) {
                     $this->flashMsg('Horse Info must be filled out.', 'warning');
-                    redirect()->back()->withInput()
+                    redirect()->back()->withInput();
                 }
 
                 $passport_photo_path = "";
