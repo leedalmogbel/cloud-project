@@ -142,8 +142,14 @@ class StableController extends Controller
                 }
 
                 $data[$key]['stable_id'] = $stable->stable_id;
-                $data[$key]['passport_photo'] = $passport_photo_path ?? '';
-                $data[$key]['horse_photo'] = $horse_photo_path ?? '';
+                if ($data[$key]['passport_photo']) {
+                    $data[$key]['passport_photo'] = $passport_photo_path ?? '';
+                }
+
+                if ($data[$key]['horse_photo']) {
+                    $data[$key]['horse_photo'] = $horse_photo_path ?? '';
+                }
+                
             }
 
             Horse::insert($data);
