@@ -113,14 +113,19 @@ class StableController extends Controller
             $stable->uuid = $stable_uuid;
             $stable->user_id = $user->user_id;
 
+            $data = $request->data;
+            if (is_null($data)) {
+                $this->flashMsg('Horse Info must be filled out.', 'warning');
+                return redirect()->back()->withInput();
+            }
+
             $stable->save();
 
-            $data = $request->data;
             foreach ($data as $key => $value) {
 
                 if (is_null($data[$key]['name'])) {
                     $this->flashMsg('Horse Info must be filled out.', 'warning');
-                    return redirect(URL::current());
+                    redirect()->back()->withInput()
                 }
 
                 $passport_photo_path = "";
