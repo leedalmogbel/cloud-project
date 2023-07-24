@@ -59,11 +59,7 @@ class StableController extends Controller
         $validator = Validator::make($request->all(),[
             'stable_no' => 'required',
             'name' => 'required',
-            'owner_name' => 'required',
-            'owner_mobile' => 'required',
-            'owner_eid' => 'required',
             'total_horses' => 'required',
-            'owner_eid_photo' => 'required|image',
         ]);
 
         if($validator->fails()){
@@ -117,7 +113,7 @@ class StableController extends Controller
             $stable->uuid = $stable_uuid;
             $stable->user_id = $user->user_id;
 
-            // $stable->save();
+            $stable->save();
 
             $data = $request->data;
             foreach ($data as $key => $value) {
@@ -146,8 +142,8 @@ class StableController extends Controller
                 }
 
                 $data[$key]['stable_id'] = $stable->stable_id;
-                $data[$key]['passport_photo'] = $passport_photo_path;
-                $data[$key]['horse_photo'] = $horse_photo_path;
+                $data[$key]['passport_photo'] = $passport_photo_path ?? '';
+                $data[$key]['horse_photo'] = $horse_photo_path ?? '';
             }
 
             Horse::insert($data);
