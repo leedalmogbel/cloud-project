@@ -129,31 +129,29 @@ class StableController extends Controller
                 }
 
                 $passport_photo_path = "";
-                if($request->file('data')[$key]['passport_photo']) {
-                    $file = $request->file('data')[$key]['passport_photo'];
-                    $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                    $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
-                    $file->move($destinationPath, $fileName);
-                    $passport_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
-                }
-
                 $horse_photo_path = "";
-                if($request->file('data')[$key]['horse_photo']) {
-                    $file = $request->file('data')[$key]['horse_photo'];
-                    $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                    $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
-                    $file->move($destinationPath, $fileName);
-                    $horse_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
+
+                if($request->file('data')) {
+                    if(isset($request->file('data')[$key]['passport_photo'])) {
+                        $file = $request->file('data')[$key]['passport_photo'];
+                        $fileName = time().rand(100,999) . $file->getClientOriginalName();
+                        $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
+                        $file->move($destinationPath, $fileName);
+                        $passport_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
+                    }
+
+                    if(isset($request->file('data')[$key]['horse_photo'])) {
+                        $file = $request->file('data')[$key]['horse_photo'];
+                        $fileName = time().rand(100,999) . $file->getClientOriginalName();
+                        $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
+                        $file->move($destinationPath, $fileName);
+                        $horse_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
+                    }
                 }
 
                 $data[$key]['stable_id'] = $stable->stable_id;
-                if ($data[$key]['passport_photo']) {
-                    $data[$key]['passport_photo'] = $passport_photo_path ?? '';
-                }
-
-                if ($data[$key]['horse_photo']) {
-                    $data[$key]['horse_photo'] = $horse_photo_path ?? '';
-                }
+                $data[$key]['passport_photo'] = $passport_photo_path ?? '';
+                $data[$key]['horse_photo'] = $horse_photo_path ?? '';
                 
             }
 
