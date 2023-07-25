@@ -122,7 +122,6 @@ class StableController extends Controller
             $stable->save();
 
             foreach ($data as $key => $value) {
-
                 if (is_null($data[$key]['name'])) {
                     $this->flashMsg('Horse Info must be filled out.', 'warning');
                     redirect()->back()->withInput();
@@ -151,8 +150,9 @@ class StableController extends Controller
 
                 $data[$key]['stable_id'] = $stable->stable_id;
                 $data[$key]['passport_photo'] = $passport_photo_path ?? '';
+                $data[$key]['is_passport'] = $data[$key]['is_passport'] ?? '1';
+                $data[$key]['is_microchip'] = $data[$key]['is_microchip'] ?? '1';
                 $data[$key]['horse_photo'] = $horse_photo_path ?? '';
-                
             }
 
             Horse::insert($data);
