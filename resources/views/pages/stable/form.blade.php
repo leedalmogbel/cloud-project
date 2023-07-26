@@ -159,7 +159,7 @@
 
 <script type="text/tpl" id="horse-info">
     <br />
-    <h2 class="horse_title_count">Horse</h2>
+    <h2 class="horse_title_count-__i__">Horse</h2>
 	<div class="row entry align-items-center my-2">
         <div class="col">
             @include('partials.formFields.inputFormGroup', [
@@ -283,16 +283,13 @@
 @section('custom-script')
     <script>
         let horseCount = 0;
-
         const addEntry = function() {
             let tpl = $('#horse-info').html().replace(/__i__/g, horseCount);
             tpl = $(tpl);
 
-            // $('h2.horse_title_count').text(`Horse ${horseCount}`);
-
             $('.stable').append(tpl);
             console.log(horseCount, 'entry coutn')
-            console.log(tpl, 'entry tpl')
+            $(`h2.horse_title_count-${horseCount}`).text(`Horse ${horseCount+1}`);
             horseCount++;
 
         };
@@ -319,6 +316,7 @@
             for (let i = 0; i < tot_horse; i++) {
                 addEntry();
             }
+
         });
 
         $(document).on('click', '.remove-this', function(e) {

@@ -21,7 +21,6 @@
                     @csrf
                     @include("pages.$modelName.form")
                     <br /><br />
-                    {{ $page }}
                     @if ($page == 'detail')
                     @else
                         {{-- <button type="submit" class="btn btn-main submit-btn">{{ strtoupper($page) }}</button> --}}

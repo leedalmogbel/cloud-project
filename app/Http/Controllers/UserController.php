@@ -254,4 +254,10 @@ class UserController extends Controller
 
         return redirect('/users');
     }
+
+    public function userDetail (Request $request) {
+        $user = UserModel::find($request->id);
+
+        return view('pages.user.detail', ['user' => $user, 'page' => 'detail']);
+    }
 }

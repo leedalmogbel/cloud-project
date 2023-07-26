@@ -217,6 +217,7 @@ Route::post('/stable/create', 'StableController@saveForm');
 Route::get('/users', 'UserController@listUsers');
 Route::get('/user/edit/{id}', 'UserController@show');
 Route::post('/user/edit/{id}', 'UserController@updateUser');
+Route::get('/user/detail/{id}', 'UserController@userDetail');
 
 
 
