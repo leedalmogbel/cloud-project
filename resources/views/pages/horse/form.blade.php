@@ -1,252 +1,157 @@
-<div class="row">
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'name',
-            'label' => 'Name',
-            'value' => $stable->stable_no ? $stable->stable_no : '',
-            'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter horse name',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'originalName',
-            'label' => 'Original Name',
-            'value' => $stable->name ? $Original->name : '',
-            'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter original name',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.selectFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'countryOfBirth',
-            'label' => 'Country of Birth',
-            // 'value' => $horse->countryOfBirth ?? '',
-            'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Select country of birth',
-            // 'options' => $countries
-        ])
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        @include('partials.formFields.selectFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'breed',
-            'label' => 'Breed',
-            // 'value' => $horse->breed ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Select horse breed',
-            // 'options' => $breeds,
-            'keyValue' => true,
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'name' => 'breeder',
-            'label' => 'Breeder',
-            // 'value' => $horse->breeder ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter Breeder',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'birthday',
-            'label' => 'Date of Birth',
-            // 'value' => $horse->birthday ?? '',
-            'idName' => 'birthday',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter birthday',
-        ])
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        @include('partials.formFields.selectFormGroup', [
-            'type' => 'text',
-            'name' => 'gender',
-            'label' => 'Gender',
-            'required' => true,
-            'keyValue' => true,
-            // 'value' => $horse->gender ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Select Gender',
-            // 'options' => $genders,
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'name' => 'colour',
-            'label' => 'Colour',
-            // 'value' => $horse->colour ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter colour',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'microchipNo',
-            'label' => 'Microchip No',
-            // 'value' => $horse->microchipNo ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter microchip No.',
-        ])
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'uelnNo',
-            'label' => 'UELN No',
-            // 'value' => $horse->uelnNo ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter UELN No.',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.selectFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'countryOfResidence',
-            'label' => 'Country of Residence',
-            // 'value' => $horse->countryOfResidence ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Select country of residence',
-            // 'options' => $countries
-        ])
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'sire',
-            'label' => 'Sire',
-            // 'value' => $horse->sire ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter Sire',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'dam',
-            'label' => 'Dam',
-            // 'value' => $horse->dam ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter Dam',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'sireOfDam',
-            'label' => 'Sire of Dam',
-            // 'value' => $horse->sireOfDam ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter Sire of Dam',
-        ])
-    </div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="/dashboard" class="btn btn-secondary me-md-2" type="button">
+        < Back to Dashboard </a>
 </div>
 <br />
-<h2 class="text-danger">FEI Registration</h2>
-<div class="row">
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'feiPassportNo',
-            'label' => 'FEI Passport No',
-            // 'value' => $horse->feiPassportNo ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter FEI Passport No',
-        ])
+<h2 class="text-danger">Horse</h2>
+<div class="horse">
+    {{-- start: horse info --}}
+    <div class="row">
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'text',
+                'required' => true,
+                'name' => 'name',
+                // 'value' => $horse->name ? $horse->name : '',
+                // 'disabled' => $page == 'detail' ? true : false,
+                'label' => 'Name',
+                'placeholder' => 'Enter Horse name',
+            ])
+        </div>
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'text',
+                'required' => true,
+                'name' => 'colour',
+                // 'value' => $horse->colour ? $horse->colour : '',
+                // 'disabled' => $page == 'detail' ? true : false,
+                'label' => 'Colour',
+                'placeholder' => 'Enter Horse Colour',
+            ])
+        </div>
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'text',
+                'required' => true,
+                'name' => 'age',
+                // 'value' => $horse->age ? $horse->age : '',
+                // 'disabled' => $page == 'detail' ? true : false,
+                'label' => 'Age',
+                'placeholder' => 'Enter Horse Age',
+            ])
+        </div>
     </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'feiExpireDate',
-            'label' => 'FEI Expiry Date',
-            // 'value' => $horse->feiExpireDate ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter FEI Expiry Date',
-            'idName' => 'fei-expire-date',
-        ])
-    </div>
-    <div class="col">
-        @include('partials.formFields.inputFormGroup', [
-            'type' => 'text',
-            'required' => true,
-            'name' => 'feiRegNo',
-            'label' => 'FEI Registration No',
-            // 'value' => $horse->feiRegNo ?? '',
-            // 'disabled' => $page == 'detail' ? true : false,
-            'placeholder' => 'Enter FEI Registration No',
-        ])
-    </div>
-</div>
-<br />
-<h2 class="text-danger">Owner Information</h2>
-@include('partials.formFields.selectFormGroup', [
-    'type' => 'text',
-    'required' => true,
-    'name' => 'owner_id',
-    'keyValue' => true,
-    'label' => 'Owner',
-    // 'value' => $horse->owner_id ?? '',
-    // 'disabled' => $page == 'detail' ? true : false,
-    'placeholder' => 'Select owner',
-    // 'options' => $owners,
-])
-<br />
-<h2 class="text-danger">Trainer Information</h2>
-@include('partials.formFields.selectFormGroup', [
-    'type' => 'text',
-    'required' => true,
-    'keyValue' => true,
-    'name' => 'trainer_id',
-    'label' => 'Trainer',
-    // 'value' => $horse->trainer_id ?? '',
-    // 'disabled' => $page == 'detail' ? true : false,
-    'placeholder' => 'Select trainer',
-    // 'options' => $trainers,
-])
+    {{-- end: horse info --}}
 
-<br />
-@include('partials.formFields.textareaFormGroup', [
-    'name' => 'remarks',
-    'label' => 'REMARKS',
-    'disabled' => $page == 'detail' ? true : false,
-    // 'value' => $horse->remarks
-])
+    {{-- start: owner --}}
+    <br />
+    <div class="row">
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'text',
+                'required' => true,
+                'name' => 'owner_name',
+                // 'value' => $horse->owner_name ? $horse->owner_name : '',
+                // 'disabled' => $page == 'detail' ? true : false,
+                'label' => 'Owner Name',
+                'placeholder' => 'Enter Owner name',
+            ])
+        </div>
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'text',
+                'required' => true,
+                'name' => 'owner_mobile',
+                // 'value' => $horse->owner_mobile ? $horse->owner_mobile : '',
+                // 'disabled' => $page == 'detail' ? true : false,
+                'label' => 'Owner Mobile',
+                'placeholder' => 'Enter Owner Mobile',
+            ])
+        </div>
+    </div>
+    {{-- end: owner --}}
 
-@section('custom-script')
-    <script>
-        $('#birthday, #fei-expire-date').daterangepicker({
-            singleDatePicker: true,
-            locale: {
-                format: 'Y-MM-DD'
-            }
-        });
-    </script>
-@endsection
+    <div class="row">
+        <div class="col">
+            @include('partials.formFields.selectFormGroup', [
+                'label' => 'Is there a Microchip?',
+                'name' => 'is_microchip',
+                'required' => true,
+                'placeholder' => 'Select',
+                'className' => 'horse-select select-2-basic',
+                'keyValue' => true,
+                'options' => ['Yes', 'No'],
+            ])
+        </div>
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'text',
+                'required' => true,
+                'name' => 'microchip_no',
+                // 'value' => $horse->microchip_no ? $horse->microchip_no : '',
+                // 'disabled' => $page == 'detail' ? true : false,
+                'label' => 'Microchip No',
+                'placeholder' => 'Enter Microchip No',
+            ])
+        </div>
+    </div>
+
+    {{-- start: docs --}}
+    <div class="row entry align-items-center mb-2">
+        <div class="col">
+            @include('partials.formFields.selectFormGroup', [
+                'label' => 'Is there a Passport?',
+                'name' => 'is_passport',
+                'required' => true,
+                'placeholder' => 'Select',
+                'className' => 'horse-select select-2-basic',
+                'keyValue' => true,
+                'options' => ['Yes', 'No'],
+            ])
+        </div>
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'text',
+                'required' => true,
+                'name' => 'passport_no',
+                // 'value' => $horse->passport_no ? $horse->passport_no : '',
+                // 'disabled' => $page == 'detail' ? true : false,
+                'label' => 'Passport No',
+                'placeholder' => 'Enter Passport No',
+            ])
+        </div>
+    </div>
+    {{-- end: docs --}}
+
+
+    <br />
+    <div class="row entry align-items-center mb-2  mh-400 mw-400">
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'file',
+                'required' => true,
+                'name' => 'passport_photo',
+                'label' => 'Passport Photo',
+            ])
+        </div>
+        <div class="col">
+            <label for="">Passport Photo</label>
+        </div>
+
+
+    </div>
+
+    <div class="row entry align-items-center mb-2  mh-400 mw-400">
+        <div class="col">
+            @include('partials.formFields.inputFormGroup', [
+                'type' => 'file',
+                'required' => true,
+                'name' => 'horse_photo',
+                'label' => 'Horse Photo',
+            ])
+        </div>
+        <div class="col">
+            <label for="">Horse Photo</label>
+        </div>
+    </div>
+</div>

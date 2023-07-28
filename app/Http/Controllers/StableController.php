@@ -59,7 +59,7 @@ class StableController extends Controller
         $validator = Validator::make($request->all(),[
             'stable_no' => 'required',
             'name' => 'required',
-            'total_horses' => 'required',
+            // 'total_horses' => 'required',
         ]);
 
         if($validator->fails()){
@@ -109,53 +109,53 @@ class StableController extends Controller
             $stable->foreman_mobile = $request->foreman_mobile ?? '';
             $stable->foreman_eid = $request->foreman_eid ?? '';
             $stable->foreman_eid_photo = $foreman_eid_photo_path ?? '';
-            $stable->total_horses = $request->total_horses;
+            $stable->total_horses = $request->total_horses ?? 0;
             $stable->uuid = $stable_uuid;
             $stable->user_id = $user->user_id;
 
-            $data = $request->data;
-            if (is_null($data)) {
-                $this->flashMsg('Horse Info must be filled out.', 'warning');
-                return redirect()->back()->withInput();
-            }
+            // // $data = $request->data;
+            // if (is_null($data)) {
+            //     $this->flashMsg('Horse Info must be filled out.', 'warning');
+            //     return redirect()->back()->withInput();
+            // }
 
             $stable->save();
 
-            foreach ($data as $key => $value) {
-                if (is_null($data[$key]['name'])) {
-                    $this->flashMsg('Horse Info must be filled out.', 'warning');
-                    redirect()->back()->withInput();
-                }
+            // foreach ($data as $key => $value) {
+            //     if (is_null($data[$key]['name'])) {
+            //         $this->flashMsg('Horse Info must be filled out.', 'warning');
+            //         redirect()->back()->withInput();
+            //     }
 
-                $passport_photo_path = "";
-                $horse_photo_path = "";
+            //     $passport_photo_path = "";
+            //     $horse_photo_path = "";
 
-                if($request->file('data')) {
-                    if(isset($request->file('data')[$key]['passport_photo'])) {
-                        $file = $request->file('data')[$key]['passport_photo'];
-                        $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                        $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
-                        $file->move($destinationPath, $fileName);
-                        $passport_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
-                    }
+            //     if($request->file('data')) {
+            //         if(isset($request->file('data')[$key]['passport_photo'])) {
+            //             $file = $request->file('data')[$key]['passport_photo'];
+            //             $fileName = time().rand(100,999) . $file->getClientOriginalName();
+            //             $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
+            //             $file->move($destinationPath, $fileName);
+            //             $passport_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
+            //         }
 
-                    if(isset($request->file('data')[$key]['horse_photo'])) {
-                        $file = $request->file('data')[$key]['horse_photo'];
-                        $fileName = time().rand(100,999) . $file->getClientOriginalName();
-                        $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
-                        $file->move($destinationPath, $fileName);
-                        $horse_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
-                    }
-                }
+            //         if(isset($request->file('data')[$key]['horse_photo'])) {
+            //             $file = $request->file('data')[$key]['horse_photo'];
+            //             $fileName = time().rand(100,999) . $file->getClientOriginalName();
+            //             $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable_uuid ."/horse/";
+            //             $file->move($destinationPath, $fileName);
+            //             $horse_photo_path = '/img/'.$user->user_id."/stable-" . $stable_uuid ."/horse/".$fileName;
+            //         }
+            //     }
 
-                $data[$key]['stable_id'] = $stable->stable_id;
-                $data[$key]['passport_photo'] = $passport_photo_path ?? '';
-                $data[$key]['is_passport'] = $data[$key]['is_passport'] ?? '1';
-                $data[$key]['is_microchip'] = $data[$key]['is_microchip'] ?? '1';
-                $data[$key]['horse_photo'] = $horse_photo_path ?? '';
-            }
+            //     $data[$key]['stable_id'] = $stable->stable_id;
+            //     $data[$key]['passport_photo'] = $passport_photo_path ?? '';
+            //     $data[$key]['is_passport'] = $data[$key]['is_passport'] ?? '1';
+            //     $data[$key]['is_microchip'] = $data[$key]['is_microchip'] ?? '1';
+            //     $data[$key]['horse_photo'] = $horse_photo_path ?? '';
+            // }
 
-            Horse::insert($data);
+            // Horse::insert($data);
 
             $this->flashMsg(sprintf('Data entered successfully.'), 'success');
 

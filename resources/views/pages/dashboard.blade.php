@@ -12,6 +12,7 @@
                 <table id="stable-listing" class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th>Sr No.</th>
                             <th>Stable</th>
                             <th>Owner</th>
                             <th>Foreman</th>
@@ -24,8 +25,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($stables as $stable)
+                        @foreach ($stables as $key => $stable)
                             <tr>
+                                <td>{{ $key + 1 }}</td>
                                 <td>
                                     <div>{{ $stable->stable_no }}</div>
                                     <div><small class="text-secondary">{{ $stable->name }}</small>
@@ -64,6 +66,12 @@
                                                 data-toggle="tooltip" data-placement="top" title="Edit"><i
                                                     class="fa fa-edit"></i></a>
                                         </li> --}}
+                                        <li class="list-inline-item">
+                                            <a href="/horse/create/{{ $stable->stable_id }}"
+                                                class="btn btn-outline-secondary btn-sm rounded-2" type="button"
+                                                data-toggle="tooltip" data-placement="top" title="Add Horse"><i
+                                                    class="fa-solid fa-circle-plus"></i></a>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -79,7 +87,7 @@
             $(document).ready(function() {
                 let table = $('#stable-listing').DataTable({
                     order: [
-                        [4, 'asc']
+                        [0, 'asc']
                     ]
                 });
                 // $('#stable-listing').DataTable({

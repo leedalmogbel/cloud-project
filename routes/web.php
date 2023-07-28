@@ -219,6 +219,12 @@ Route::get('/user/edit/{id}', 'UserController@show');
 Route::post('/user/edit/{id}', 'UserController@updateUser');
 Route::get('/user/detail/{id}', 'UserController@userDetail');
 
+// HORSE
+Route::get('/horse/create/{id}', 'HorseController@createForm');
+Route::post('/horse/create/{id}', 'HorseController@saveForm');
+Route::get('/horse/edit/{id}', 'HorseController@show');
+Route::post('/horse/edit/{id}', 'HorseController@update');
+Route::get('/horse/detail/{id}', 'HorseController@horseDetail');
 
 
 

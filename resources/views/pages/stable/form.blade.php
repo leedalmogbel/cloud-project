@@ -141,7 +141,7 @@
     {{-- end: foreman --}}
 
 
-    <br />
+    {{-- <br />
     <div class="col">
         @include('partials.formFields.inputFormGroup', [
             'type' => 'text',
@@ -153,11 +153,11 @@
             // 'disabled' => $page == 'detail' ? true : false,
             'placeholder' => 'Enter Total Horse',
         ])
-    </div>
+    </div> --}}
     {{-- <a href="#" class="btn btn-main" id="add-entry"><i class="fa-solid fa-plus"></i> Add Horse</a> --}}
 </div>
 
-<script type="text/tpl" id="horse-info">
+{{-- <script type="text/tpl" id="horse-info">
     <br />
     <h2 class="horse_title_count-__i__">Horse</h2>
 	<div class="row entry align-items-center my-2">
@@ -279,8 +279,8 @@
         </div>
 	</div>
     <hr>
-</script>
-@section('custom-script')
+</script> --}}
+{{-- @section('custom-script')
     <script>
         let horseCount = 0;
         const addEntry = function() {
@@ -327,4 +327,4 @@
             selected.call(this, 'rider');
         });
     </script>
-@endsection
+@endsection --}}

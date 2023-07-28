@@ -5,8 +5,9 @@ namespace App\Validators;
 use App\Models\Horse as HorseModel;;
 use App\Exceptions\FieldException;
 use App\Exceptions\MsgException;
+use Illuminate\Database\Eloquent\Model;
 
-class Horse {
+class Horse extends Model {
     use Base;
     
     const MODEL_NAME = 'Horse';

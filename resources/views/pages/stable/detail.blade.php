@@ -9,7 +9,7 @@
             </div>
             <br />
             <h2 class="text-danger">Stable</h2>
-            <div class="stable">
+            <div class="row stable">
                 {{-- start: stable --}}
                 <div class="row">
                     <div class="col">
@@ -148,7 +148,8 @@
 
 
                 <br />
-                <div class="col">
+                <hr class="my-3">
+                {{-- <div class="col">
                     @include('partials.formFields.inputFormGroup', [
                         'type' => 'text',
                         'required' => true,
@@ -159,160 +160,77 @@
                         'disabled' => $page == 'detail' ? true : false,
                         'placeholder' => 'Enter Total Horse',
                     ])
-                </div>
+                </div> --}}
                 {{-- <a href="#" class="btn btn-main" id="add-entry"><i class="fa-solid fa-plus"></i> Add Horse</a> --}}
             </div>
 
-            @foreach ($stable->horses as $horse)
-                <br />
-                <h2 class="horse_title_count">Horse</h2>
-                <div class="row entry align-items-center my-2">
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'data[__i__][name]',
-                            'value' => $horse->name ? $horse->name : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'label' => 'Name',
-                            'placeholder' => 'Enter Horse name',
-                        ])
-                    </div>
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'data[__i__][colour]',
-                            'value' => $horse->colour ? $horse->colour : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'label' => 'Colour',
-                            'placeholder' => 'Enter Horse Colour',
-                        ])
-                    </div>
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'data[__i__][age]',
-                            'value' => $horse->age ? $horse->age : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'label' => 'Age',
-                            'placeholder' => 'Enter Horse Age',
-                        ])
-                    </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <h2 class="text-danger">Horses</h2>
                 </div>
-
-                <div class="row entry align-items-center mb-2">
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'data[__i__][owner_name]',
-                            'value' => $horse->owner_name ? $horse->owner_name : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'label' => 'Owner Name',
-                            'placeholder' => 'Enter Owner name',
-                        ])
-                    </div>
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'data[__i__][owner_mobile]',
-                            'value' => $horse->owner_mobile ? $horse->owner_mobile : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'label' => 'Owner Mobile',
-                            'placeholder' => 'Enter Owner Mobile',
-                        ])
-                    </div>
+                <div class="col d-flex justify-content-end">
+                    <a href="/horse/create/{{ $stable->stable_id }}" class="btn btn-main"><i class="fa-solid fa-plus"></i>
+                        Add Horse</a>
                 </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive col col-md col-xl col-xxl align-items-center justify-content-center">
+                    <table id="stable-listing" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Horse</th>
+                                <th>Owner</th>
+                                <th>Microchip</th>
+                                <th>Passport</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($stable->horses as $key => $horse)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <div>{{ $horse->name }}</div>
+                                        <div><small class="text-secondary">{{ $horse->age }}</small>
+                                            <div><small class="text-secondary">{{ $horse->colour }}</small>
+                                    </td>
+                                    <td>
+                                        {{ $horse->owner_name }}
+                                    </td>
+                                    <td>
+                                        {{ $horse->microchip_no }}
+                                    </td>
+                                    <td>
+                                        {{ $horse->passport_no }}
+                                    </td>
+                                    <td>
+                                        {{ date('d-m-Y', strtotime($horse->updated_at)) }}
+                                    </td>
 
-                <div class="row entry align-items-center mb-2">
-                    {{-- <div class="col">
-                @include('partials.formFields.selectFormGroup', [
-                    'label' => 'Is there a Microchip?',
-                    'name' => 'data[__i__][is_microchip]',
-                    'required' => true,
-                    'placeholder' => 'Select',
-                    'className' => 'horse-select select-2-basic',
-                    'keyValue' => true,
-                    'options' => ['Yes', 'No'],
-                ])
-            </div> --}}
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'data[__i__][microchip_no]',
-                            'value' => $horse->microchip_no ? $horse->microchip_no : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'label' => 'Microchip No',
-                            'placeholder' => 'Enter Microchip No',
-                        ])
-                    </div>
+                                    <td>
+                                        <ul class="list-inline m-0">
+                                            <li class="list-inline-item">
+                                                <a href="/horse/detail/{{ $horse->horse_id }}"
+                                                    class="btn btn-outline-secondary btn-sm rounded-2" type="button"
+                                                    data-toggle="tooltip" data-placement="top" title="View"><i
+                                                        class="fa-solid fa-eye"></i></a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="/horse/edit/{{ $horse->horse_id }}"
+                                                    class="btn btn-outline-secondary btn-sm rounded-2" type="button"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                        class="fa fa-edit"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
-                <div class="row entry align-items-center mb-2">
-                    {{-- <div class="col">
-                @include('partials.formFields.selectFormGroup', [
-                    'label' => 'Is there a Passport?',
-                    'name' => 'data[__i__][is_passport]',
-                    'required' => true,
-                    'placeholder' => 'Select',
-                    'className' => 'horse-select select-2-basic',
-                    'keyValue' => true,
-                    'options' => ['Yes', 'No'],
-                ])
-            </div> --}}
-                    <div class="col">
-                        @include('partials.formFields.inputFormGroup', [
-                            'type' => 'text',
-                            'required' => true,
-                            'name' => 'data[__i__][passport_no]',
-                            'value' => $horse->passport_no ? $horse->passport_no : '',
-                            'disabled' => $page == 'detail' ? true : false,
-                            'label' => 'Passport No',
-                            'placeholder' => 'Enter Passport No',
-                        ])
-                    </div>
-                </div>
-
-                <div class="row entry align-items-center mb-2  mh-400 mw-400">
-                    {{-- <div class="col">
-                @include('partials.formFields.inputFormGroup', [
-                    'type' => 'file',
-                    'required' => true,
-                    'name' => 'data[__i__][passport_photo]',
-                    'label' => 'Passport Photo',
-                ])
-            </div> --}}
-                    <div class="col">
-                        <label for="">Passport Photo</label>
-                        <img src="{{ url($horse->passport_photo) }}" class="img-fluid" alt="">
-                    </div>
-                    <div class="col">
-                        <label for="">Horse Photo</label>
-                        <img src="{{ url($horse->horse_photo) }}" class="img-fluid" alt="">
-                    </div>
-
-
-                </div>
-
-                <div class="row entry align-items-center mb-2  mh-400 mw-400">
-                    {{-- <div class="col">
-                @include('partials.formFields.inputFormGroup', [
-                    'type' => 'file',
-                    'required' => true,
-                    'name' => 'data[__i__][horse_photo]',
-                    'label' => 'Horse Photo',
-                ])
-            </div> --}}
-                    {{-- <label for="">Horse Photo</label>
-                    <img src="{{ url($horse->horse_photo) }}" class="img-fluid" alt=""> --}}
-
-                </div>
-                <hr>
-            @endforeach
+            </div>
         </div>
     </div>
 
