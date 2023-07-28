@@ -1,7 +1,7 @@
 @extends('partials.frame')
 
 @section('content')
-    <div class="content container-fluid col col-md col-xl col-xxl align-items-center justify-content-center">
+    <div class="content container-fluid col col-md col-xl col-xxl align-items-center justify-content-center my-5">
         <div class="row my-3">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a href="/stable/create" class="btn btn-secondary btn-lg">Add Stable</a>
@@ -86,6 +86,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 let table = $('#stable-listing').DataTable({
+                    pagingType: 'full_numbers',
                     order: [
                         [0, 'asc']
                     ]

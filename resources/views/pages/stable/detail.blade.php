@@ -1,7 +1,7 @@
 @extends('partials.frame')
 
 @section('content')
-    <div class="content col col-md">
+    <div class="content col col-md my-5">
         <div class="container">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a href="/dashboard" class="btn btn-secondary me-md-2" type="button">
@@ -232,6 +232,30 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            let table = $('#stable-listing').DataTable({
+                pagingType: 'full_numbers',
+                order: [
+                    [0, 'asc']
+                ]
+            });
+            // $('#stable-listing').DataTable({
+            //     search: {
+            //         return: true,
+            //     },
+            // });
+
+            $('#stable-listing').on('change', function() {
+                table.order([]);
+                table.search(this.value).draw();
+            })
+
+        });
+    </script>
+
     </div>
 
     <script type="text/tpl" id="horse-info">
