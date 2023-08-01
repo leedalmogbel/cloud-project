@@ -19,7 +19,7 @@
                             <th>Horses</th>
                             <th>Date</th>
                             @if ($role === 'superadmin')
-                                <th>Account</th>
+                                <th>Doctor</th>
                             @endif
                             <th>Actions</th>
                         </tr>
@@ -48,7 +48,7 @@
                                 </td>
                                 @if ($role === 'superadmin')
                                     <td>
-                                        {{ $stable->user->username }}
+                                        {{ $stable->user->firstname }}
                                     </td>
                                 @endif
 
@@ -60,12 +60,12 @@
                                                 data-toggle="tooltip" data-placement="top" title="View"><i
                                                     class="fa-solid fa-eye"></i></a>
                                         </li>
-                                        {{-- <li class="list-inline-item">
+                                        <li class="list-inline-item">
                                             <a href="/stable/edit/{{ $stable->stable_id }}"
                                                 class="btn btn-outline-secondary btn-sm rounded-2" type="button"
                                                 data-toggle="tooltip" data-placement="top" title="Edit"><i
                                                     class="fa fa-edit"></i></a>
-                                        </li> --}}
+                                        </li>
                                         <li class="list-inline-item">
                                             <a href="/horse/create/{{ $stable->stable_id }}"
                                                 class="btn btn-outline-secondary btn-sm rounded-2" type="button"
