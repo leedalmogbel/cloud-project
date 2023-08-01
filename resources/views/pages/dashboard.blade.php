@@ -2,6 +2,28 @@
 
 @section('content')
     <div class="content container-fluid col col-md col-xl col-xxl align-items-center justify-content-center my-5">
+        @if ($role === 'superadmin')
+            <div class="row my-3">
+                <div class="card-wrapper d-flex justify-content-evenly">
+                    <div class="card col-4">
+                        <div class="card-header text-center">
+                            Stables
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ $allStables }}</h5>
+                        </div>
+                    </div>
+                    <div class="card col-4">
+                        <div class="card-header text-center">
+                            Horses
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ $allHorses }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="row my-3">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a href="/stable/create" class="btn btn-secondary btn-lg">Add Stable</a>
