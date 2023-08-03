@@ -130,11 +130,7 @@ class DashboardController extends Controller
                                 }
                             }
                         }
-
-                        $directories[$itemPath] = $directoryFiles;
-                        if($request->query('files')) {
-                            $directories[] = $directoryFiles;
-                        }
+                        $directories[] = $request->query('files') ? $directoryFiles : $directories[$itemPath] = $directoryFiles;
 
                     }
                 }
