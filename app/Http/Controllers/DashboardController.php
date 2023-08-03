@@ -133,7 +133,7 @@ class DashboardController extends Controller
 
                         $directories[$itemPath] = $directoryFiles;
                         if($request->query('files')) {
-                            $directories = $directoryFiles;
+                            $directories[] = $directoryFiles;
                         }
 
                     }
