@@ -10,6 +10,7 @@ use App\Models\Stable as Stable;
 use App\Models\Horse as Horse;
 use Session;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -108,11 +109,23 @@ class DashboardController extends Controller
     // }
 
     public function getFiles() {
-        $directoryPath = public_path("/home/eiev/eiev-app.ae/bouthib/Bouthib/");
+        $directoryPath = public_path('c://'); //public_path("/home/eiev/eiev-app.ae/bouthib/Bouthib/");
+        // $directoryPath = 'timing_files';
+
         
-        $files = File::allFiles($directoryPath);
+        $files = File::files(public_path('/home/eiev/eiev-app.ae/bouthib/Bouthib/'));
         
-        $directories = File::directories($directoryPath);
+        // $directories = Storage::disk('timing_files')->files('C:\\sandbox\\'); //File::directories($directoryPath);
+
+        // $filesPath = array();
+        // foreach ($files as $file) {
+        //     $filesPath[] = $file->getFilename();
+        // }
+        
+        // Loop through directories
+        // foreach ($directories as $directory) {
+        //     echo basename($directory) . "\n"; // Use basename() to get the directory name
+        // }
         dd($files);
 
 
