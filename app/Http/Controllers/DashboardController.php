@@ -109,25 +109,35 @@ class DashboardController extends Controller
     // }
 
     public function getFiles() {
-        $directoryPath = public_path('c://'); //public_path("/home/eiev/eiev-app.ae/bouthib/Bouthib/");
-        // $directoryPath = 'timing_files';
+        $directoryPath = '/home/eiev/eiev-app.ae/bouthib/Bouthib/'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib/
+        $directories = [];
 
-        
-        $files = File::files(public_path('/home/eiev/eiev-app.ae/bouthib/Bouthib/'));
-        
-        // $directories = Storage::disk('timing_files')->files('C:\\sandbox\\'); //File::directories($directoryPath);
+        if (is_dir($directoryPath)) {
+            $items = scandir($directoryPath);
 
-        // $filesPath = array();
-        // foreach ($files as $file) {
-        //     $filesPath[] = $file->getFilename();
-        // }
-        
-        // Loop through directories
-        // foreach ($directories as $directory) {
-        //     echo basename($directory) . "\n"; // Use basename() to get the directory name
-        // }
-        dd($files);
+            foreach ($items as $item) {
+                if ($item !== '.' && $item !== '..') {
+                    $itemPath = $directoryPath . DIRECTORY_SEPARATOR . $item;
+                    if (is_dir($itemPath)) {
+                        $directoryFiles = [];
+                        $subItems = scandir($itemPath);
 
+                        foreach ($subItems as $subItem) {
+                            if ($subItem !== '.' && $subItem !== '..') {
+                                $subItemPath = $itemPath . DIRECTORY_SEPARATOR . $subItem;
+                                if (is_file($subItemPath)) {
+                                    $directoryFiles[] = $subItemPath;
+                                }
+                            }
+                        }
 
+                        $directories[$itemPath] = $directoryFiles;
+                    }
+                }
+            }
+        }
+
+        return response()->json(
+            ['directories' => $directories]);
     }
 }
