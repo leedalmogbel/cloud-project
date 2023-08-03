@@ -130,8 +130,7 @@ class DashboardController extends Controller
                                 }
                             }
                         }
-                        $directories[] = $request->query('csv_only') ? $directoryFiles : $directories[$itemPath] = $directoryFiles;
-
+                        $directories[] = $request->query('csv_only') === "true" ? $directoryFiles : $directories[$itemPath] = $directoryFiles;
                     }
                 }
             }
