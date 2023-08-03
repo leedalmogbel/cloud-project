@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Stable as Stable;
 use App\Models\Horse as Horse;
 use Session;
+use Illuminate\Support\Facades\File;
 
 class DashboardController extends Controller
 {
@@ -38,5 +39,82 @@ class DashboardController extends Controller
             'allStables' => $allStables,
             'allHorses' => $allHorses
         ]);
+    }
+
+
+    // public function getStablesHorses(Request $request) {
+
+    //     ## Read value
+    //     $draw = $request->get('draw');
+    //     $start = $request->get("start");
+    //     $rowperpage = $request->get("length"); // Rows display per page
+
+    //     $columnIndex_arr = $request->get('order');
+    //     $columnName_arr = $request->get('columns');
+    //     $order_arr = $request->get('order');
+    //     $search_arr = $request->get('search');
+
+    //     $columnIndex = $columnIndex_arr[0]['column']; // Column index
+    //     $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+    //     $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+    //     $searchValue = $search_arr['value']; // Search value
+
+    //     // Total records
+    //     $totalRecords = Stable::select('count(*) as allcount')->count();
+    //     $totalRecordswithFilter = Stable::select('count(*) as allcount')->where('name', 'like', '%' .$searchValue . '%')->count();
+
+    //     // Fetch records
+    //     $records = Stable::orderBy($columnName,$columnSortOrder)
+    //     ->where('stables.name', 'like', '%' . $searchValue . '%')
+    //     ->orWhere('stables.owner_name', 'like', '%' . $searchValue . '%')
+    //     ->orWhere('stables.foreman_name', 'like', '%' . $searchValue . '%')
+    //     ->orWhereHas('horses', function ($query) use ($searchValue) {
+    //             return $query
+    //                 ->where('name', 'like', '%' . $searchValue . '%')
+    //                 ->where('microchip_no', 'like', '%' . $searchValue . '%');
+    //     })
+    //     ->select('stables.*')
+    //     ->skip($start)
+    //     ->take($rowperpage)
+    //     ->get();
+
+    //     $data_arr = array();
+
+    //     foreach($records as $record){
+    //         $stable_no = $record->stable_no;
+    //         $stable_name = $record->stable_name;
+    //         $owner_name = $record->owner_name;
+    //         $foreman_name = $record->foreman_name;
+    //         $doctor_name = $record->user->firstname;
+
+    //         $data_arr[] = array(
+    //             "stable_no" => $stable_no,
+    //             "stable_name" => $stable_name,
+    //             "owner_name" => $owner_name,
+    //             "foreman_name" => $foreman_name,
+    //             "doctor_name" => $doctor_name,
+    //         );
+    //     }
+
+    //     $response = array(
+    //         "draw" => intval($draw),
+    //         "iTotalRecords" => $totalRecords,
+    //         "iTotalDisplayRecords" => $totalRecordswithFilter,
+    //         "aaData" => $data_arr
+    //     );
+
+    //     return $response;
+
+    // }
+
+    public function getFiles() {
+        $directoryPath = public_path("/home/eiev/eiev-app.ae/bouthib/Bouthib/");
+        
+        $files = File::allFiles($directoryPath);
+        
+        $directories = File::directories($directoryPath);
+        dd($files);
+
+
     }
 }
