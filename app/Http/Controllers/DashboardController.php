@@ -112,25 +112,51 @@ class DashboardController extends Controller
         $directoryPath = '/home/eiev/eiev-app.ae/bouthib/Bouthib'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib/
         $directories = [];
 
-        if (is_dir($directoryPath)) {
-            $items = scandir($directoryPath);
-
-            foreach ($items as $item) {
-                if ($item !== '.' && $item !== '..') {
-                    $itemPath = $directoryPath . DIRECTORY_SEPARATOR . $item;
-                    if (is_dir($itemPath)) {
-                        $directoryFiles = [];
-                        $subItems = scandir($itemPath);
-
-                        foreach ($subItems as $subItem) {
-                            if ($subItem !== '.' && $subItem !== '..') {
-                                $subItemPath = $itemPath . DIRECTORY_SEPARATOR . $subItem;
-                                if (is_file($subItemPath)) {
-                                    $directoryFiles[] = $subItemPath;
+        if ($request->query('csv_only') == 'true') {
+            if (is_dir($directoryPath)) {
+                $items = scandir($directoryPath);
+    
+                foreach ($items as $item) {
+                    if ($item !== '.' && $item !== '..') {
+                        $itemPath = $directoryPath . DIRECTORY_SEPARATOR . $item;
+                        if (is_dir($itemPath)) {
+                            $directoryFiles = [];
+                            $subItems = scandir($itemPath);
+    
+                            foreach ($subItems as $subItem) {
+                                if ($subItem !== '.' && $subItem !== '..') {
+                                    $subItemPath = $itemPath . DIRECTORY_SEPARATOR . $subItem;
+                                    if (is_file($subItemPath)) {
+                                        $directoryFiles[] = $subItemPath;
+                                    }
                                 }
                             }
+                            $directories[$itemPath] = $directoryFiles;
                         }
-                        $directories[] = $request->query('csv_only') === "true" ? $directoryFiles : $directories[$itemPath] = $directoryFiles;
+                    }
+                }
+            }    
+        } else {
+            if (is_dir($directoryPath)) {
+                $items = scandir($directoryPath);
+    
+                foreach ($items as $item) {
+                    if ($item !== '.' && $item !== '..') {
+                        $itemPath = $directoryPath . DIRECTORY_SEPARATOR . $item;
+                        if (is_dir($itemPath)) {
+                            $directoryFiles = [];
+                            $subItems = scandir($itemPath);
+    
+                            foreach ($subItems as $subItem) {
+                                if ($subItem !== '.' && $subItem !== '..') {
+                                    $subItemPath = $itemPath . DIRECTORY_SEPARATOR . $subItem;
+                                    if (is_file($subItemPath)) {
+                                        $directoryFiles[] = $subItemPath;
+                                    }
+                                }
+                            }
+                            $directories[] = $directoryFiles;
+                        }
                     }
                 }
             }
