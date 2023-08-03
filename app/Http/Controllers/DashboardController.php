@@ -108,8 +108,8 @@ class DashboardController extends Controller
 
     // }
 
-    public function getFiles() {
-        $directoryPath = '/home/eiev/eiev-app.ae/bouthib/Bouthib/'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib/
+    public function getFiles(Request $request) {
+        $directoryPath = '/home/eiev/eiev-app.ae/bouthib/Bouthib'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib/
         $directories = [];
 
         if (is_dir($directoryPath)) {
@@ -132,6 +132,10 @@ class DashboardController extends Controller
                         }
 
                         $directories[$itemPath] = $directoryFiles;
+                        if($request->query('files')) {
+                            $directories = $directoryFiles;
+                        }
+
                     }
                 }
             }
