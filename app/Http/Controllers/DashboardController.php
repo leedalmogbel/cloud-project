@@ -131,11 +131,11 @@ class DashboardController extends Controller
                                     }
                                 }
                             }
-                            $directories[$itemPath] = $directoryFiles;
+                            $directories[] = $directoryFiles;
                         }
                     }
                 }
-            }    
+            }
         } else {
             if (is_dir($directoryPath)) {
                 $items = scandir($directoryPath);
@@ -155,7 +155,7 @@ class DashboardController extends Controller
                                     }
                                 }
                             }
-                            $directories[] = $directoryFiles;
+                            $directories[$itemPath] = $directoryFiles;
                         }
                     }
                 }
