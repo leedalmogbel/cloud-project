@@ -89,6 +89,11 @@
                                                     class="fa fa-edit"></i></a>
                                         </li>
                                         <li class="list-inline-item">
+                                            <a href="/stable/delete/{{ $stable->stable_id }}" id="delete-stable"
+                                                class="btn btn-outline-secondary btn-sm rounded-2" type="button"
+                                                data-toggle="tooltip" data-placement="top" title="Delete Horse"><i class="fa-solid fa-trash-can"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
                                             <a href="/horse/create/{{ $stable->stable_id }}"
                                                 class="btn btn-outline-secondary btn-sm rounded-2" type="button"
                                                 data-toggle="tooltip" data-placement="top" title="Add Horse"><i
@@ -103,15 +108,58 @@
             </div>
         </div>
 
-
+        <script type="text/tpl" id="rules-content">
+            <p>Are you sure you want to delete this Stable?</p>
+        </script>
 
         <script type="text/javascript">
             $(document).ready(function() {
+                let i = 0;
                 let table = $('#stable-listing').DataTable({
                     pagingType: 'full_numbers',
                     order: [
                         [0, 'asc']
-                    ]
+                    ],
+                    // processing: true,
+                    // serverSide: true,
+                    // ajax: {
+                    //     url: "{{ route('stables.horses') }}",
+                    //     // data: function(d) {
+                    //     //     d.search = $('input[type="search"]').val()
+                    //     // }
+                    // },
+                    // columns: [{
+                    //         "render": function() {
+                    //             return i++;
+                    //         }
+                    //     },
+                    //     {
+                    //         data: 'stable_no',
+                    //         name: 'stable_no'
+                    //     },
+                    //     {
+                    //         data: 'stable_name',
+                    //         name: 'stable_name'
+                    //     },
+                    //     {
+                    //         data: 'owner_name',
+                    //         name: 'owner_name'
+                    //     },
+                    //     {
+                    //         data: 'foreman_name',
+                    //         name: 'foreman_name'
+                    //     },
+                    //     {
+                    //         data: 'doctor_name',
+                    //         name: 'doctor_name'
+                    //     },
+                    //     {
+                    //         data: 'action',
+                    //         name: 'action',
+                    //         orderable: false,
+                    //         searchable: false
+                    //     }
+                    // ]
                 });
                 // $('#stable-listing').DataTable({
                 //     search: {
@@ -124,6 +172,35 @@
                     table.search(this.value).draw();
                 })
 
+            });
+        </script>
+
+        <script>
+            $(document).on('click', '#delete-stable', function(e) {
+                console.log('test')
+                e.preventDefault();
+                let self = this;
+                let href = $(self).attr('href');
+                let urlParams = new URLSearchParams(window.location.search);
+                $.confirm({
+                    title: 'Delete Stable',
+                    columnClass: 'col-md-6',
+                    content: $('#rules-content').html(),
+                    buttons: {
+                        'Yes': {
+                            btnClass: 'btn-main',
+                            action: function() {
+                                window.location.href = href
+                            }
+                        },
+                        'No': {
+                            btnClass: 'btn-danger',
+                            action: function() {
+
+                            }
+                        }
+                    }
+                });
             });
         </script>
 

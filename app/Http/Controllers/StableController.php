@@ -185,8 +185,6 @@ class StableController extends Controller
      */
     public function show($id)
     {
-        //
-
         if(empty(Session::has('role'))) {
             Session::flash('message', 'Session Expired!');
             Session::flash('message_type', 'error');
@@ -228,7 +226,54 @@ class StableController extends Controller
     public function update(Request $request, $id)
     {
         //
-        dd($request);
+        try {
+            $stable = Stable::where('stable_id', $id)->first();
+            if(!$stable) {
+                $this->flashMsg('Stable is must be available', 'warning');
+                return redirect()->back()->withInput();
+            }
+
+            $user = json_decode(session()->get('user'));
+            $stable->update([
+                "stable_no" => $request->stable_no ?? '',
+                "name" => $request->name ?? '',
+                "owner_name" => $request->owner_name ?? '',
+                "owner_mobile" => $request->owner_mobile ?? '',
+                "owner_eid" => $request->owner_id ?? '',
+                "foreman_name" => $request->foreman_name ?? '',
+                "foreman_mobile" => $request->foreman_mobile ?? '',
+                "foreman_eid" => $request->foreman_eid ?? '',
+            ]);
+
+            if($request->hasFile('owner_eid_photo')) {
+                $file = $request->file('owner_eid_photo');
+                $fileName = time().rand(100,999) . $file->getClientOriginalName();
+                $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable->stable_uuid;
+                $file->move($destinationPath, $fileName);
+                $stable->update([
+                    'owner_eid_photo' => '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName
+                ]);
+                // $owner_eid_photo_path = '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName;
+            }
+
+            if($request->hasFile('foreman_eid_photo')) {
+                $file = $request->file('foreman_eid_photo');
+                $fileName = time().rand(100,999) . $file->getClientOriginalName();
+                $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable->stable_uuid;
+                $file->move($destinationPath, $fileName);
+                $stable->update([
+                    'foreman_eid_photo' => '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName
+                ]);
+                // $foreman_eid_photo_path = '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName;
+            }
+
+            $this->flashMsg(sprintf('Data entered successfully.'), 'success');
+        } catch (\Exception $e) {
+            //throw $th;
+            return $e->getMessage();
+        }
+
+        return redirect('/dashboard');
     }
 
     /**
@@ -240,5 +285,23 @@ class StableController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deleteStable($id) {
+        try {
+            $stable = Stable::where('stable_id', $id)->first();
+            if(!$stable) {
+                $this->flashMsg('Stable is must be available', 'warning');
+                return redirect()->back()->withInput();
+            }
+
+            $stable->delete();
+
+            $this->flashMsg(sprintf('Data entered successfully.'), 'success');
+
+        } catch(\Exception $e) {
+            return $e->getMessage();
+        }
+        return redirect('/dashboard');
     }
 }
