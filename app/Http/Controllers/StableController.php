@@ -234,25 +234,25 @@ class StableController extends Controller
             }
 
             $user = json_decode(session()->get('user'));
-            $stable->update([
-                "stable_no" => $request->stable_no ?? '',
-                "name" => $request->name ?? '',
-                "owner_name" => $request->owner_name ?? '',
-                "owner_mobile" => $request->owner_mobile ?? '',
-                "owner_eid" => $request->owner_id ?? '',
-                "foreman_name" => $request->foreman_name ?? '',
-                "foreman_mobile" => $request->foreman_mobile ?? '',
-                "foreman_eid" => $request->foreman_eid ?? '',
-            ]);
+
+            $stable->stable_no = $request->stable_no ?? '';
+            $stable->name = $request->name ?? '';
+            $stable->owner_name = $request->owner_name ?? '';
+            $stable->owner_mobile = $request->owner_mobile ?? '';
+            $stable->owner_eid = $request->owner_eid ?? '';
+            $stable->foreman_name = $request->foreman_name ?? '';
+            $stable->foreman_mobile = $request->foreman_mobile ?? '';
+            $stable->foreman_eid = $request->foreman_eid ?? '';
 
             if($request->hasFile('owner_eid_photo')) {
                 $file = $request->file('owner_eid_photo');
                 $fileName = time().rand(100,999) . $file->getClientOriginalName();
                 $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable->stable_uuid;
                 $file->move($destinationPath, $fileName);
-                $stable->update([
-                    'owner_eid_photo' => '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName
-                ]);
+                // $stable->update([
+                //     'owner_eid_photo' => '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName
+                // ]);
+                $stable->owner_eid_photo = '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName;
                 // $owner_eid_photo_path = '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName;
             }
 
@@ -261,11 +261,14 @@ class StableController extends Controller
                 $fileName = time().rand(100,999) . $file->getClientOriginalName();
                 $destinationPath = public_path(). "/img/".$user->user_id . "/stable-" . $stable->stable_uuid;
                 $file->move($destinationPath, $fileName);
-                $stable->update([
-                    'foreman_eid_photo' => '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName
-                ]);
+                // $stable->update([
+                //     'foreman_eid_photo' => '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName
+                // ]);
+                $stable->foreman_eid_photo = '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName;
                 // $foreman_eid_photo_path = '/img/'.$user->user_id."/stable-" . $stable->stable_uuid ."/".$fileName;
             }
+
+            $stable->save();
 
             $this->flashMsg(sprintf('Data entered successfully.'), 'success');
         } catch (\Exception $e) {
