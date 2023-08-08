@@ -156,14 +156,14 @@ class DashboardController extends Controller
             if (is_dir($directoryPath)) {
                 $items = scandir($directoryPath);
     
-                foreach ($items as $item) {
+                foreach ($items as $key => $item) {
                     if ($item !== '.' && $item !== '..') {
                         $itemPath = $directoryPath . DIRECTORY_SEPARATOR . $item;
                         if (is_dir($itemPath)) {
                             $directoryFiles = array();
                             $subItems = scandir($itemPath);
     
-                            foreach ($subItems as $key => $subItem) {
+                            foreach ($subItems as $subItem) {
                                 if ($subItem !== '.' && $subItem !== '..') {
                                     $subItemPath = $itemPath . DIRECTORY_SEPARATOR . $subItem;
                                     if (is_file($subItemPath)) {
