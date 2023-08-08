@@ -170,9 +170,9 @@ class DashboardController extends Controller
                                         // $directoryFiles[$key][$subItemPath] = $subItemPath;
                                         // $directoryFiles[$key][$subItemPath] = date("F d Y H:i:s", filemtime($subItemPath));
                                         $directoryFiles[$key][] = [
-                                            'last_modified_dir' => date("yyyy-MM-dd", filemtime($itemPath)),
+                                            'last_modified_dir' => date("Y-m-d", filemtime($itemPath)),
                                             'file' => $subItemPath,
-                                            'last_modified_file' => date("yyyy-MM-dd", filemtime($subItemPath))
+                                            'last_modified_file' => date("Y-m-d", filemtime($subItemPath))
                                         ];
                                         // dd(date("F d Y H:i:s", filemtime($subItemPath)));
                                     }
