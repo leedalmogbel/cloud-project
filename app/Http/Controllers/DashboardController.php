@@ -149,7 +149,7 @@ class DashboardController extends Controller
     // }
 
     public function getFiles(Request $request) {
-        $directoryPath = '/home/eiev/eiev-app.ae/bouthib/Bouthib/'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib
+        $directoryPath = '/home/eiev/eiev-app.ae/bouthib/Bouthib'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib
         $directories = [];
 
         if ($request->query('csv_only') == 'true') {
@@ -208,18 +208,6 @@ class DashboardController extends Controller
                 }
             }
         }
-
-        usort($directories, function($dateA, $dateB)
-        {
-            if (empty($dateA) && empty($dateB)) {
-                return 0; // Both arrays are empty, consider them equal
-            } elseif (empty($dateA)) {
-                return -1; // $a is empty, consider it "less than" $b
-            } elseif (empty($dateB)) {
-                return 1; // $b is empty, consider it "less than" $a
-            }
-            return strtotime($dateA[0]['last_modified_dir']) - strtotime($dateB[0]['last_modified_dir']);
-        });
 
         return response()->json(
             ['directories' => $directories]);
