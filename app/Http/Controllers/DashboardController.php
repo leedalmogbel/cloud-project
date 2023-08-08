@@ -209,7 +209,14 @@ class DashboardController extends Controller
             }
         }
 
+        usort($directories, 'compareLastModifiedDir');
+
         return response()->json(
             ['directories' => $directories]);
     }
+
+    function compareLastModifiedDir($dateA, $dateB) {
+        return strtotime($dateA[0]['last_modified_dir']) - strtotime($dateB[0]['last_modified_dir']);
+    }
+
 }
