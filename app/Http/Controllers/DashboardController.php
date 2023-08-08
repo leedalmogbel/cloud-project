@@ -149,7 +149,7 @@ class DashboardController extends Controller
     // }
 
     public function getFiles(Request $request) {
-        $directoryPath = 'c://sandbox/'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib
+        $directoryPath = '/home/eiev/eiev-app.ae/bouthib/Bouthib'; // c://sandbox/ || /home/eiev/eiev-app.ae/bouthib/Bouthib
         $directories = [];
 
         if ($request->query('csv_only') == 'true') {
