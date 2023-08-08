@@ -42,6 +42,46 @@ class DashboardController extends Controller
         ]);
     }
 
+    // public function index(Request $request) {
+    //     $draw = $request->get('draw');
+    //     $start = $request->get("start");
+    //     $rowperpage = $request->get("length"); // Rows display per page
+
+    //     $columnIndex_arr = $request->get('order');
+    //     $columnName_arr = $request->get('columns');
+    //     $order_arr = $request->get('order');
+    //     $search_arr = $request->get('search');
+
+    //     $columnIndex = $columnIndex_arr[0]['column']; // Column index
+    //     $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+    //     $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+    //     $searchValue = $search_arr['value']; // Search value
+
+    //     if ($request->ajax()) {
+    //         $data = Stable::orderBy($columnName,$columnSortOrder)
+    //             ->where('stables.name', 'like', '%' . $searchValue . '%')
+    //             ->orWhere('stables.owner_name', 'like', '%' . $searchValue . '%')
+    //             ->orWhere('stables.foreman_name', 'like', '%' . $searchValue . '%')
+    //             ->orWhereHas('horses', function ($query) use ($searchValue) {
+    //                     return $query
+    //                         ->where('name', 'like', '%' . $searchValue . '%')
+    //                         ->where('microchip_no', 'like', '%' . $searchValue . '%');
+    //             })
+    //             ->select('stables.*')
+    //             ->skip($start)
+    //             ->take($rowperpage)
+    //             ->get();
+    //         return Datatables::of($data)
+    //                 ->addIndexColumn()
+    //                 ->addColumn('action', function($row) {
+    //                     $btn = '<a href="/stable/detail/{{ .$stable->stable_id. }}"
+    //                     class="btn btn-outline-secondary btn-sm rounded-2" type="button"
+    //                     data-toggle="tooltip" data-placement="top" title="View"><i
+    //                         class="fa-solid fa-eye"></i></a>'
+    //                 })
+    //     }
+    // }
+
 
     // public function getStablesHorses(Request $request) {
 
@@ -120,14 +160,21 @@ class DashboardController extends Controller
                     if ($item !== '.' && $item !== '..') {
                         $itemPath = $directoryPath . DIRECTORY_SEPARATOR . $item;
                         if (is_dir($itemPath)) {
-                            $directoryFiles = [];
+                            $directoryFiles = array();
                             $subItems = scandir($itemPath);
     
-                            foreach ($subItems as $subItem) {
+                            foreach ($subItems as $key => $subItem) {
                                 if ($subItem !== '.' && $subItem !== '..') {
                                     $subItemPath = $itemPath . DIRECTORY_SEPARATOR . $subItem;
                                     if (is_file($subItemPath)) {
-                                        $directoryFiles[] = $subItemPath;
+                                        // $directoryFiles[$key][$subItemPath] = $subItemPath;
+                                        // $directoryFiles[$key][$subItemPath] = date("F d Y H:i:s", filemtime($subItemPath));
+                                        $directoryFiles[$key][] = [
+                                            'last_modified_dir' => date("F d Y H:i:s", filemtime($itemPath)),
+                                            'file' => $subItemPath,
+                                            'last_modified_file' => date("F d Y H:i:s", filemtime($subItemPath))
+                                        ];
+                                        // dd(date("F d Y H:i:s", filemtime($subItemPath)));
                                     }
                                 }
                             }
