@@ -12,6 +12,7 @@ use App\Http\Controllers\FentryControler;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\LentryController;
 use App\Http\Controllers\FhorseController;
+use App\Http\Controllers\StationRecordsController;
 use App\Http\Middleware\EnsureClientIsValid;
 use App\Http\Middleware\EnsureClientIsFed;
 use App\Models\Reusable;
@@ -28,4 +29,9 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Route::get('/files', 'DashboardController@getFiles');
+Route::get('/', function () {
+    return 'ping!';
+});
+
+Route::get('records', [StationRecordsController::class, 'index']);
+Route::post('records', [StationRecordsController::class, 'createTmpRecord']);

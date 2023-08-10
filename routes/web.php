@@ -1,52 +1,52 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 
-use App\Http\Middleware\SessionChecker;
-use App\Http\Controllers\FentryControler;
-use App\Http\Controllers\FeventController;
-$defaultRoutes = [
-    'get:/create' => [
-        'createForm',
-        ['sessionChecker:superadmin'],
-    ],
-    'post:/create' => [
-        'create',
-        ['sessionChecker:superadmin'],
-    ],
-    'get:/' => [
-        'listing',
-        ['sessionChecker:superadmin,admin'],
-    ],
-    'get:/statusUpdate/{status}/{id}' => [
-        'statusUpdate',
-        ['sessionChecker:superadmin, admin'],
-    ],
-    'get:/detail/{id}' => [
-        'detail',
-        ['sessionChecker:superadmin,admin'],
-    ],
-    'get:/update/{id}' => [
-        'updateForm',
-        ['sessionChecker:superadmin'],
-    ],
-    'post:/update/{id}' => [
-        'update',
-        ['sessionChecker:superadmin'],
-    ]
-];
+// use App\Http\Middleware\SessionChecker;
+// use App\Http\Controllers\FentryControler;
+// use App\Http\Controllers\FeventController;
+// $defaultRoutes = [
+//     'get:/create' => [
+//         'createForm',
+//         ['sessionChecker:superadmin'],
+//     ],
+//     'post:/create' => [
+//         'create',
+//         ['sessionChecker:superadmin'],
+//     ],
+//     'get:/' => [
+//         'listing',
+//         ['sessionChecker:superadmin,admin'],
+//     ],
+//     'get:/statusUpdate/{status}/{id}' => [
+//         'statusUpdate',
+//         ['sessionChecker:superadmin, admin'],
+//     ],
+//     'get:/detail/{id}' => [
+//         'detail',
+//         ['sessionChecker:superadmin,admin'],
+//     ],
+//     'get:/update/{id}' => [
+//         'updateForm',
+//         ['sessionChecker:superadmin'],
+//     ],
+//     'post:/update/{id}' => [
+//         'update',
+//         ['sessionChecker:superadmin'],
+//     ]
+// ];
 
-$adminRoutes = [
+// $adminRoutes = [
     // 'season' => $defaultRoutes,
     // 'event'  => $defaultRoutes,
-    'stable' => $defaultRoutes,
+    // 'stable' => $defaultRoutes,
     // 'owner' => $defaultRoutes,
     // 'trainer' => $defaultRoutes,
     // 'rider' => $defaultRoutes,
-    'horse' => $defaultRoutes,
+    // 'horse' => $defaultRoutes,
     // 'race' => $defaultRoutes,
     // 'entry' => $defaultRoutes,
-];
+// ];
 
 /* 
 |------------------------------------------------------------------------
@@ -55,7 +55,7 @@ $adminRoutes = [
  */
 
 // race
-$adminRoutes['race']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['race']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
 
 // entry
 // $adminRoutes['entry']['get:/create'][1] = ['sessionChecker:superadmin,admin,user'];
@@ -63,11 +63,11 @@ $adminRoutes['race']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
 // $adminRoutes['entry']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
 
 // horse
-$adminRoutes['horse']['get:/create'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['horse']['post:/create'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['horse']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['horse']['get:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['horse']['post:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['horse']['get:/create'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['horse']['post:/create'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['horse']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['horse']['get:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['horse']['post:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
 
 // trainer
 // $adminRoutes['trainer']['get:/create'][1] = ['sessionChecker:superadmin,admin,user'];
@@ -91,11 +91,11 @@ $adminRoutes['horse']['post:/update/{id}'][1] = ['sessionChecker:superadmin,admi
 // $adminRoutes['rider']['post:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
 
 // stable
-$adminRoutes['stable']['get:/create'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['stable']['post:/create'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['stable']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['stable']['get:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
-$adminRoutes['stable']['post:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['stable']['get:/create'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['stable']['post:/create'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['stable']['get:/'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['stable']['get:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
+// $adminRoutes['stable']['post:/update/{id}'][1] = ['sessionChecker:superadmin,admin,user'];
 //echo '<pre>'; print_r($adminRoutes); exit;
 /*
 |--------------------------------------------------------------------------
@@ -118,22 +118,22 @@ $adminRoutes['stable']['post:/update/{id}'][1] = ['sessionChecker:superadmin,adm
 //         return redirect('/dashboard');
 //     }
 // })->middleware(SessionChecker::class);
-Route::get('/', function () {
-    return view('login');
-});
+// Route::get('/', function () {
+//     return view('login');
+// });
 
-Route::get('/login', 'UserController@loginForm');
-Route::post('/login', 'UserController@login');
+// Route::get('/login', 'UserController@loginForm');
+// Route::post('/login', 'UserController@login');
 
-Route::get('/register', 'UserController@registerForm');
-Route::post('/register', 'UserController@register');
+// Route::get('/register', 'UserController@registerForm');
+// Route::post('/register', 'UserController@register');
 
-Route::get('/role', 'RoleController@listing');
-Route::get('/role/update/{id}', 'RoleController@updateForm');
+// Route::get('/role', 'RoleController@listing');
+// Route::get('/role/update/{id}', 'RoleController@updateForm');
 
-foreach ($adminRoutes as $modelControl => $routes) {
-    $controller = ucwords($modelControl);
-    $controller .= "Controller";
+// foreach ($adminRoutes as $modelControl => $routes) {
+//     $controller = ucwords($modelControl);
+//     $controller .= "Controller";
 
     // foreach ($routes as $methodRoute => $actions) {
     //     // dd($actions);
@@ -150,7 +150,7 @@ foreach ($adminRoutes as $modelControl => $routes) {
     // Route::get("/$route/detail/{id}", "{$controller}@detail");
     // Route::get("/$route/update/{id}", "{$controller}@updateForm");
     // Route::post("/$route/update/{id}", "{$controller}@update");
-}
+// }
 //
 // Route::domain('devregistration.eiev-app.ae')->group(function ()
 // {
@@ -200,33 +200,33 @@ foreach ($adminRoutes as $modelControl => $routes) {
 
 // custom routes
 // Route::get('/entry/user/{userId}', "EntryController@horseRider");
-Route::get('/logout', function () {
-    session()->forget(['user', 'role']);
-    return redirect('/login');
-});
+// Route::get('/logout', function () {
+//     session()->forget(['user', 'role']);
+//     return redirect('/login');
+// });
 
-Route::get('/dashboard', "DashboardController@index");
-Route::get('/stables-horses', 'DashboardController@getStablesHorses')->name('stables.horses');
-Route::get('/me', 'UserController@me');
-Route::get('/stable/detail/{id}', 'StableController@show');
-Route::get('/stable/edit/{id}', 'StableController@edit');
-Route::post('/stable/edit/{id}', 'StableController@update');
-Route::get('/stable/create', 'StableController@createForm');
-Route::post('/stable/create', 'StableController@saveForm');
-Route::get('/stable/delete/{id}', 'StableController@deleteStable');
+// Route::get('/dashboard', "DashboardController@index");
+// Route::get('/stables-horses', 'DashboardController@getStablesHorses')->name('stables.horses');
+// Route::get('/me', 'UserController@me');
+// Route::get('/stable/detail/{id}', 'StableController@show');
+// Route::get('/stable/edit/{id}', 'StableController@edit');
+// Route::post('/stable/edit/{id}', 'StableController@update');
+// Route::get('/stable/create', 'StableController@createForm');
+// Route::post('/stable/create', 'StableController@saveForm');
+// Route::get('/stable/delete/{id}', 'StableController@deleteStable');
 
-// USER
-Route::get('/users', 'UserController@listUsers');
-Route::get('/user/edit/{id}', 'UserController@show');
-Route::post('/user/edit/{id}', 'UserController@updateUser');
-Route::get('/user/detail/{id}', 'UserController@userDetail');
+// // USER
+// Route::get('/users', 'UserController@listUsers');
+// Route::get('/user/edit/{id}', 'UserController@show');
+// Route::post('/user/edit/{id}', 'UserController@updateUser');
+// Route::get('/user/detail/{id}', 'UserController@userDetail');
 
 // HORSE
-Route::get('/horse/create/{id}', 'HorseController@createForm');
-Route::post('/horse/create/{id}', 'HorseController@saveForm');
-Route::get('/horse/edit/{id}', 'HorseController@show');
-Route::post('/horse/edit/{id}', 'HorseController@update');
-Route::get('/horse/detail/{id}', 'HorseController@horseDetail');
+// Route::get('/horse/create/{id}', 'HorseController@createForm');
+// Route::post('/horse/create/{id}', 'HorseController@saveForm');
+// Route::get('/horse/edit/{id}', 'HorseController@show');
+// Route::post('/horse/edit/{id}', 'HorseController@update');
+// Route::get('/horse/detail/{id}', 'HorseController@horseDetail');
 
 
 
