@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\StationRecordsTable;
 use App\Models\StationRecordsTmpTable;
-
+use DB;
 class StationRecordsController extends Controller
 {
     //
@@ -17,11 +17,11 @@ class StationRecordsController extends Controller
         }
 
         if ($request->id_code) {
-            $query->where('id_code', $request->id_code);
+            $query->orWhere('id_code', $request->id_code);
         }
 
         if ($request->loop_no) {
-            $query->where('loop_no', $request->loop_no);
+            $query->orWhere('loop_no', $request->loop_no);
         }
 
         if ($request->start_code) {
@@ -73,8 +73,17 @@ class StationRecordsController extends Controller
         }
 
         $chunkedData = array_chunk($insertData, 25);
+        // foreach ($chunkedData as $chunk) {
+        //     StationRecordsTmpTable::insert($chunk);
+        // }
+
+        $uniqueColumns = ['server_ip', 'server_sn', 'loop_no', 'start_code', 'date_stamp'];
+
         foreach ($chunkedData as $chunk) {
-            StationRecordsTmpTable::insert($chunk);
+            DB::table('tbl_station_records')->upsert(
+                $chunk,
+                $uniqueColumns, // Unique columns for upsert
+            );
         }
         
         return response()->json(
