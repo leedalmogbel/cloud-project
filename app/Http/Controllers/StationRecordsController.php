@@ -28,6 +28,10 @@ class StationRecordsController extends Controller
             $query->where('start_code', $request->start_code);
         }
 
+        if ($request->loop_order) {
+            $query->orderBy('loop_no')->orderBy('start_no');
+        }
+
         $data = $query->get();
 
         return response()->json(
