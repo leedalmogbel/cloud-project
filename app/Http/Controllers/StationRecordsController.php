@@ -33,9 +33,13 @@ class StationRecordsController extends Controller
         }
 
         $data = $query->get();
+        $count = $query->count();
 
         return response()->json(
-            ['data' => $data]
+            [
+                'data' => $data,
+                'count' => $count
+            ]
         );
     }
 
