@@ -87,10 +87,25 @@ class StationRecordsController extends Controller
         $uniqueColumns = ['server_ip', 'server_sn', 'loop_no', 'start_code', 'date_stamp'];
 
         foreach ($chunkedData as $chunk) {
-            DB::table('tbl_station_records')->upsert(
-                $chunk,
-                $uniqueColumns, // Unique columns for upsert
-            );
+            // DB::table('tbl_station_records')->upsert(
+            //     $chunk,
+            //     $uniqueColumns, // Unique columns for upsert
+            // );
+            $dbDateStamp = $chunk['date_stamp'];
+            $existingRecord = DB::table('tbl_station_records')
+                ->where('server_ip', $chunk['server_ip'])
+                ->where('server_sn', $chunk['server_sn'])
+                ->where('loop_no', $chunk['loop_no'])
+                ->where('start_code', $chunk['start_code'])
+                ->where('date_stamp', '<', $dbDateStamp)
+                ->first();
+
+            if (!$existingRecord) {
+                DB::table('tbl_station_records')->upsert(
+                    [$chunk],
+                    $uniqueColumns,
+                );
+            }
         }
         
         return response()->json(
