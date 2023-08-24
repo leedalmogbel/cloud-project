@@ -17,11 +17,11 @@ class StationRecordsController extends Controller
         }
 
         if ($request->id_code) {
-            $query->orWhere('id_code', $request->id_code);
+            $query->where('id_code', $request->id_code);
         }
 
         if ($request->loop_no) {
-            $query->orWhere('loop_no', $request->loop_no);
+            $query->where('loop_no', $request->loop_no);
         }
 
         if ($request->start_code) {
