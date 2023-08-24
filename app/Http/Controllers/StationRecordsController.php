@@ -71,6 +71,7 @@ class StationRecordsController extends Controller
                     'vet_entries_re_exam' => isset($row[18]) ? (string)($row[18]) : '', // vet_entries_re_exam
                     'datetime_stamp' => isset($row[19]) ? (string)($row[19]) : '', // datetime_stamp
                     'date_stamp' => isset($row[20]) ? (string)($row[20]) : '', // date_stamp
+                    'last_update_stamp' => now(), // last_update_stamp
                 ];
                 // dd($insertData);
             }

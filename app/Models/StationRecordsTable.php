@@ -23,7 +23,7 @@ class StationRecordsTable extends Model
         'vet_re_insp',
         'vet_re_exam',
         'departure_time',
-        'recovery',
+        'recovery_time',
         'loop_time',
         'loop_speed',
         'vet_entries_1st_insp',
@@ -31,6 +31,7 @@ class StationRecordsTable extends Model
         'vet_entries_re_exam',
         'date_stamp',
         'datetime_stamp',
+        'last_update_stamp'
     ];
     public $timestamps = false;
 }
