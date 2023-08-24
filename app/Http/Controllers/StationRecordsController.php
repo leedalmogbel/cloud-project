@@ -50,24 +50,27 @@ class StationRecordsController extends Controller
             $insertData = [];
             foreach ($csvData as $row) {
                 $insertData[] = [
-                    'server_ip' => isset($row[0]) ? (string)($row[0]) : '', 
-                    'server_sn' => isset($row[1]) ? (string)($row[1]) : '', 
-                    'id_code' => isset($row[2]) ? intval($row[2]) : '', 
-                    'start_no' => isset($row[3]) ? intval($row[3]) : '', 
-                    'loop_no' => isset($row[4]) ? intval($row[4]) : '', 
-                    'start_code' => isset($row[5]) ? (string)($row[5]) : '', 
-                    'station_status' => isset($row[6]) ? (string)($row[6]) : '', 
-                    'start_time' => isset($row[7]) ? (string)($row[7]) : '', 
-                    'arrival_time' => isset($row[8]) ? (string)($row[8]) : '', 
-                    'vet_1st_insp' => isset($row[9]) ? (string)($row[9]) : '', 
-                    'vet_re_insp' => isset($row[10]) ? (string)($row[10]) : '', 
-                    'vet_re_exam' => isset($row[11]) ? (string)($row[11]) : '', 
-                    'departure_time' => isset($row[12]) ? (string)($row[12]) : '', 
-                    'vet_entries_1st_insp' => isset($row[13]) ? (string)($row[13]) : '', 
-                    'vet_entries_re_insp' => isset($row[14]) ? (string)($row[14]) : '', 
-                    'vet_entries_re_exam' => isset($row[15]) ? (string)($row[15]) : '', 
-                    'date_stamp' => isset($row[16]) ? (string)($row[16]) : '', 
-                    'datetime_stamp' => isset($row[17]) ? (string)($row[17]) : '',
+                    'server_ip' => isset($row[0]) ? (string)($row[0]) : '', // server_ip
+                    'server_sn' => isset($row[1]) ? (string)($row[1]) : '', // server_sn
+                    'id_code' => isset($row[2]) ? intval($row[2]) : '', // id_code
+                    'start_no' => isset($row[3]) ? intval($row[3]) : '', // horse_no
+                    'loop_no' => isset($row[4]) ? intval($row[4]) : '', // phase_no
+                    'start_code' => isset($row[5]) ? (string)($row[5]) : '', // start_code
+                    'station_status' => isset($row[6]) ? (string)($row[6]) : '', // station_status
+                    'start_time' => isset($row[7]) ? (string)($row[7]) : '', // start_time
+                    'arrival_time' => isset($row[8]) ? (string)($row[8]) : '', // arrival_time
+                    'vet_1st_insp' => isset($row[9]) ? (string)($row[9]) : '', // vet_1st_insp
+                    'vet_re_insp' => isset($row[10]) ? (string)($row[10]) : '', // vet_re_insp
+                    'vet_re_exam' => isset($row[11]) ? (string)($row[11]) : '', // vet_re_exam
+                    'departure_time' => isset($row[12]) ? (string)($row[12]) : '', // departure_time
+                    'recovery_time' => isset($row[13]) ? (string)($row[13]) : '', // recovery
+                    'loop_time' => isset($row[14]) ? (string)($row[14]) : '', // loop_time
+                    'loop_speed' => isset($row[15]) ? (string)($row[15]) : '', // loop_speed
+                    'vet_entries_1st_insp' => isset($row[16]) ? (string)($row[16]) : '',// vet_entries_1st_insp
+                    'vet_entries_re_insp' => isset($row[17]) ? (string)($row[17]) : '', // vet_entries_re_insp
+                    'vet_entries_re_exam' => isset($row[18]) ? (string)($row[18]) : '', // vet_entries_re_exam
+                    'date_stamp' => isset($row[19]) ? (string)($row[19]) : '', // date_stamp
+                    'datetime_stamp' => isset($row[20]) ? (string)($row[20]) : '', // datetime_stamp
                 ];
                 // dd($insertData);
             }
