@@ -69,8 +69,8 @@ class StationRecordsController extends Controller
                     'vet_entries_1st_insp' => isset($row[16]) ? (string)($row[16]) : '',// vet_entries_1st_insp
                     'vet_entries_re_insp' => isset($row[17]) ? (string)($row[17]) : '', // vet_entries_re_insp
                     'vet_entries_re_exam' => isset($row[18]) ? (string)($row[18]) : '', // vet_entries_re_exam
-                    'date_stamp' => isset($row[19]) ? (string)($row[19]) : '', // date_stamp
-                    'datetime_stamp' => isset($row[20]) ? (string)($row[20]) : '', // datetime_stamp
+                    'datetime_stamp' => isset($row[19]) ? (string)($row[19]) : '', // datetime_stamp
+                    'date_stamp' => isset($row[20]) ? (string)($row[20]) : '', // date_stamp
                 ];
                 // dd($insertData);
             }
