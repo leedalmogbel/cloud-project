@@ -118,4 +118,25 @@ class StationRecordsController extends Controller
             ['message' => $message]
         );
     }
+
+    public function deleteRecord(Request $request) {
+        $existingRecords = StationRecordsTable::where('loop_no', $request->loop_no)
+            ->where('id_code', $request->id_code)
+            ->where('server_sn', 'like', '%' . $request->server_sn . '%')->get();
+
+            $count = $existingRecords->count();
+
+        if ($count) {
+            $primaryKey = 'auto_num';
+            StationRecordsTable::whereIn($primaryKey, $existingRecords->pluck($primaryKey))->delete();
+
+            return response()->json(
+                ['message' => 'Successfully deleted ' . $count . ' record(s)'],
+            );
+        }
+
+        return response()->json(
+            ['message' => $count . ' record(s) found'],
+        );
+    }
 }

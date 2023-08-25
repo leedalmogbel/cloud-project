@@ -35,3 +35,4 @@ Route::get('/', function () {
 
 Route::get('records', [StationRecordsController::class, 'index']);
 Route::post('records', [StationRecordsController::class, 'createTmpRecord']);
+Route::delete('records', [StationRecordsController::class, 'deleteRecord']);
