@@ -13,7 +13,7 @@ class StationRecordsController extends Controller
 
         $query = StationRecordsTable::query();
         if ($request->server_sn) {
-            $query->where('server_sn', $request->server_sn);
+            $query->where('server_sn', 'like', '%' . $request->server_sn . '%');
         }
 
         if ($request->id_code) {
