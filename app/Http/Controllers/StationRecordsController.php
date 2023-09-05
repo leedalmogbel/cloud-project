@@ -74,7 +74,7 @@ class StationRecordsController extends Controller
                     'vet_entries_re_insp' => isset($row[17]) ? (string)($row[17]) : '', // vet_entries_re_insp
                     'vet_entries_re_exam' => isset($row[18]) ? (string)($row[18]) : '', // vet_entries_re_exam
                     'datetime_stamp' => isset($row[19]) ? (string)($row[19]) : '', // datetime_stamp
-                    'is_departure_time_final' => isset($row[20]) ? (string)($row[20]) : '', // is_departure_time_final
+                    'is_departure_time_final' => isset($row[20]) ? intval($row[20]) : '', // is_departure_time_final
                     'date_stamp' => isset($row[21]) ? (string)($row[21]) : '', // date_stamp
                     'last_update_stamp' => now(), // last_update_stamp
                 ];
