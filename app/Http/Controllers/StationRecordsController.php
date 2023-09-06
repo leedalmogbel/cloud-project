@@ -43,6 +43,25 @@ class StationRecordsController extends Controller
         );
     }
 
+    public function getStationRecordsByGroup(Request $request) {
+        $query = StationRecordsTable::get();
+
+        $data = array();
+        foreach ($query as $record) {
+            $loopName = 'loop_' . $record->loop_no;
+            $data[$loopName][] = $record;
+        }
+
+        $count = $query->count();
+
+        return response()->json(
+            [
+                'data' => $data,
+                'count' => $count
+            ]
+        );
+    }
+
     public function createTmpRecord(Request $request) {
         $message = 'creation success';
 
